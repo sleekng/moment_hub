@@ -1,0 +1,26 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mukta', sans-serif;
+}
+
+
+
+/* div:hover, span:hover {
+        transition: all 0.2s linear;
+}
+div, span{
+        transition: all 0.2s linear;
+} */
+
+.moment-text-effect-parent:hover {
+        background-color: #FEF4FF;
+        transition: all 0.2s linear;
+      }
+      
+      .moment-text-effect-parent:hover .moment-text-effect-child {
+       color: #E567F8;
+       transition: all 0.2s linear;
+        
+      }
