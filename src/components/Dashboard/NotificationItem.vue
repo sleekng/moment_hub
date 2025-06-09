@@ -6,7 +6,6 @@
         <img :src="notification.notifier?.avatar || '/assets/avatar.svg'" alt="Profile" class="w-full rounded-full object-cover">
       </div>
     </div>
-    {{ notification }}
 
     <div class="w-full">
       <p class="text-sm text-gray-700">
