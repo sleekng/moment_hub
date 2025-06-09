@@ -1,0 +1,4739 @@
+{
+	"info": {
+		"_postman_id": "d0f2e4ac-98ed-4293-8f58-c81158eecf1b",
+		"name": "Moment Hub Backend API",
+		"description": "This is backend api for **MOMENT HUB.**\n\n## Base Url\n\n```\nhttps://be.momentshub.org/api\n\n ```\n\n## Headers\n\n`Accept: application/json`\n\n`Content-Type: application/json`\n\nFor requests containing media files:\n\n`Content-Type: multipart/form-data`\n\n## Authentication\n\nAuthentication is provided using Token-Based Authentication. Use the token gotten from the previous request `/register` or `/login` at the Bearer Token for subsequent requests. Each token lasts for 24 hours.\n\n_**Note:**_ _Ensure to redirect your user to the Login url when you receive the_ `_401_` _HTTP status code which shows that the request requires authentication._",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23884569"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\",\n    \"password\": \"Password12#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/login",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login (Success)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\",\n    \"password\": \"NewPass1234#\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/login",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 Sep 2024 07:04:47 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful.\",\n    \"data\": {\n        \"username\": \"johndoe\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"lyte.onyema@gmail.com\",\n        \"gender\": \"male\",\n        \"dob\": \"09/23\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"verified\": false,\n        \"friends_count\": 0,\n        \"likes_count\": 0,\n        \"wishlists_count\": 0,\n        \"friendship_id\": null,\n        \"friendship_status\": null,\n        \"token\": \"1|bvYdosREJV6RRROppLSXcAQ9YNwC6AGxSG8wbr3M98c1ea13\"\n    }\n}"
+						},
+						{
+							"name": "Login (Failed)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\",\n    \"password\": \"Pass1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/login",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:41:35 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lyte.oneyma@gmail.com\",\n    \"password\": \"Pass1234#\",\n    \"password_confirmation\": \"Pass1234#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/register",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "After registration with only the email and password, you are required to call the **profile update** endpoint to update other user fields to be able to proceed with other requests."
+					},
+					"response": [
+						{
+							"name": "Register (Success)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"sample@gmail.com\",\n    \"password\": \"Pass1234#\",\n    \"password_confirmation\": \"Pass1234#\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/register",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 15:44:37 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Registration Successful\",\n    \"data\": {\n        \"token\": \"1|bvYdosREJV6RRROppLSXcAQ9YNwC6AGxSG8wbr3M98c1ea13\"\n    }\n}"
+						},
+						{
+							"name": "Register (Failed)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"lyte.onyemagmail.com\",\n    \"password\": \"pass\",\n    \"password_confirmation\": \"Pass1234#\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/register",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:40:29 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The email field must be a valid email address. (and 5 more errors)\",\n    \"errors\": {\n        \"email\": [\n            \"The email field must be a valid email address.\"\n        ],\n        \"password\": [\n            \"The password field confirmation does not match.\",\n            \"The password field must be at least 8 characters.\",\n            \"The password field must contain at least one uppercase and one lowercase letter.\",\n            \"The password field must contain at least one symbol.\",\n            \"The password field must contain at least one number.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/forgot-password",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Forgot Password (Success)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/forgot-password",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:42:45 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"We have emailed your password reset link.\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Forgot Password (Failed)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"lyte.onyema@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/forgot-password",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"forgot-password"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:37:41 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Please wait before retrying.\",\n    \"errors\": {\n        \"email\": [\n            \"Please wait before retrying.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"39da41821868c3f0cbacc2b690f2808576fd9be4b37b1f2a69315ce90f151247\",\n    \"email\": \"lyte.onyema@gmail.com\",\n    \"password\": \"NewPass1234#\",\n    \"password_confirmation\": \"NewPass1234#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/reset-password",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reset Password (Success)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"39da41821868c3f0cbacc2b690f2808576fd9be4b37b1f2a69315ce90f151247\",\n    \"email\": \"lyte.onyema@gmail.com\",\n    \"password\": \"NewPass1234#\",\n    \"password_confirmation\": \"NewPass1234#\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/reset-password",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"reset-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:50:21 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Your password has been reset.\"\n}"
+						},
+						{
+							"name": "Reset Password (Failed)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"token\": \"c2c4f532a61fd334eaccebdb576d3d322b75daf\",\n    \"email\": \"lyte.oneyma@gmail.com\",\n    \"password\": \"NewPass1234\",\n    \"password_confirmation\": \"NewPass1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/reset-password",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"reset-password"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 02:49:07 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The password field must contain at least one symbol.\",\n    \"errors\": {\n        \"password\": [\n            \"The password field must contain at least one symbol.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/verify-email",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"verify-email"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Email (Success)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/verify-email",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"verify-email"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 03:00:44 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "6"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "4"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Verification link sent.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{localToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/logout",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/logout",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 Sep 2024 03:06:17 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User logged out\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Account Settings",
+			"item": [
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe\",\n    // \"email\": \"\",\n    \"gender\": \"male\",\n    \"dob\": \"09/23\",\n    \"country\": \"Nigeria\",\n    \"state\": \"Lagos\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/profile",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe\",\n    // \"email\": \"\",\n    \"gender\": \"male\",\n    \"dob\": \"09/23\",\n    \"country\": \"Nigeria\",\n    \"state\": \"Lagos\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/profile",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"profile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.11"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Sep 2024 07:02:41 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Profile updated.\",\n    \"data\": {\n        \"username\": \"johndoe\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"lyte.onyema@gmail.com\",\n        \"gender\": \"male\",\n        \"dob\": \"09/23\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"verified\": false\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Photo Update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": "/Users/kdns/Downloads/caraboby.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localUrl}}/profile",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Photo Update",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "avatar",
+													"type": "file",
+													"src": "/Users/kdns/Downloads/caraboby.jpeg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{localUrl}}/profile",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"profile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 12 Oct 2024 15:42:12 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Profile updated.\",\n    \"data\": {\n        \"username\": \"pkulas\",\n        \"first_name\": \"Susana\",\n        \"last_name\": \"Green\",\n        \"email\": \"yesenia01@example.com\",\n        \"avatar\": \"https://res.cloudinary.com/deauvn4s8/image/upload/c_fill,g_face,h_220,w_220/v1/momenthub/user/syv9nbezq2dyhptsz4bi\",\n        \"gender\": \"male\",\n        \"dob\": \"11/20\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"verified\": true,\n        \"friends_count\": 0,\n        \"likes_count\": null,\n        \"wishlists_count\": null,\n        \"friendship_id\": null,\n        \"friendship_status\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "Fetch Address",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{stagingUrl}}/addresses",
+									"host": [
+										"{{stagingUrl}}"
+									],
+									"path": [
+										"addresses"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/addresses",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"addresses"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Oct 2024 05:29:53 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Fetched addresses\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"street\": \"12 Osborne Road\",\n            \"type\": \"Building\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"city\": \"Ikoyi\",\n            \"zip_code\": null,\n            \"phone\": null,\n            \"private\": 0,\n            \"created_at\": \"2024-10-19T05:27:28.000000Z\",\n            \"updated_at\": \"2024-10-19T05:29:23.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"street\": \"117 Ozumba mbadiwe\",\n            \"type\": \"Apartment\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"city\": \"Ikoyi\",\n            \"zip_code\": null,\n            \"phone\": null,\n            \"private\": 1,\n            \"created_at\": \"2024-10-19T05:29:50.000000Z\",\n            \"updated_at\": \"2024-10-19T05:29:50.000000Z\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Add address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"street\": \"117 Ozumba mbadiwe\",\n    \"type\": \"Apartment\",\n    \"country\": \"Nigeria\",\n    \"state\": \"Lagos\",\n    \"city\": \"Ikoyi\",\n    \"private\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/addresses",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"addresses"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add address",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"street\": \"117 Ozumba mbadiwe\",\n    \"type\": \"Building\",\n    \"country\": \"Nigeria\",\n    \"state\": \"Lagos\",\n    \"city\": \"Ikoyi\",\n    \"private\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/addresses",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"addresses"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Oct 2024 05:27:28 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Address created.\",\n    \"data\": {\n        \"street\": \"117 Ozumba mbadiwe\",\n        \"type\": \"Building\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"city\": \"Ikoyi\",\n        \"private\": false,\n        \"user_id\": 1,\n        \"updated_at\": \"2024-10-19T05:27:28.000000Z\",\n        \"created_at\": \"2024-10-19T05:27:28.000000Z\",\n        \"id\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Address",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"street\": \"12 Osborne Road\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/addresses/1",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Address",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"street\": \"12 Osborne Road\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/addresses/1",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"addresses",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Oct 2024 05:29:23 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Address updated.\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"street\": \"12 Osborne Road\",\n        \"type\": \"Building\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"city\": \"Ikoyi\",\n        \"zip_code\": null,\n        \"phone\": null,\n        \"private\": 0,\n        \"created_at\": \"2024-10-19T05:27:28.000000Z\",\n        \"updated_at\": \"2024-10-19T05:29:23.000000Z\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Address",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/addresses/1",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Delete Address",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/addresses/1",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"addresses",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Oct 2024 05:30:21 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Address deleted.\",\n    \"data\": []\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Privacy & Safety",
+					"item": [
+						{
+							"name": "Get all settings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/user-privacy",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"user-privacy"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/user-privacy",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"user-privacy"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Oct 2024 08:39:04 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Loaded all settings\",\n    \"data\": [\n        {\n            \"id\": 49,\n            \"title\": \"Who can see my profile\",\n            \"value\": \"friends only\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:39:00.000000Z\"\n        },\n        {\n            \"id\": 99,\n            \"title\": \"Who can see my reserved and received wishes\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        },\n        {\n            \"id\": 149,\n            \"title\": \"Who can send me friend request\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        },\n        {\n            \"id\": 199,\n            \"title\": \"Who can tag me to a wishlist\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        },\n        {\n            \"id\": 249,\n            \"title\": \"Who can nominate me for a wish\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        },\n        {\n            \"id\": 299,\n            \"title\": \"Who can reserve my wish\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        },\n        {\n            \"id\": 349,\n            \"title\": \"Who can see my birthday\",\n            \"value\": \"everyone\",\n            \"options\": [\n                \"everyone\",\n                \"friends only\",\n                \"no one\"\n            ],\n            \"created_at\": \"2024-10-20T08:15:46.000000Z\",\n            \"updated_at\": \"2024-10-20T08:15:46.000000Z\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"value\": \"friends only\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/user-privacy/49",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"user-privacy",
+										"49"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"value\": \"friends only\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/user-privacy/49",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"user-privacy",
+												"49"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Oct 2024 08:39:00 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Privacy setting updated.\",\n    \"data\": []\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "Get settings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/notification-settings",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"notification-settings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/notification-settings",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"notification-settings"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Oct 2024 18:46:33 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Fetched notification settings\",\n    \"data\": [\n        {\n            \"id\": 49,\n            \"title\": \"Someone likes my wishlist\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 99,\n            \"title\": \"Someone likes my wish\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 149,\n            \"title\": \"New friend request\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 199,\n            \"title\": \"Accepted friend request\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 249,\n            \"title\": \"Someone tags me to their wish\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 299,\n            \"title\": \"Someone reserves my wish\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 349,\n            \"title\": \"Someone fulfils my wish\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 399,\n            \"title\": \"Send a reminder four weeks before my birthday and remind me to update my list\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 449,\n            \"title\": \"Send reminders for upcoming birthdays\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Toggle Setting",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"push\" // or email\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/notification-settings",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"notification-settings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Toggle successfully",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"type\": \"push\" // or email\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/notification-settings",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"notification-settings"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Oct 2024 18:56:35 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Toggle successful!\",\n    \"data\": [\n        {\n            \"id\": 49,\n            \"title\": \"Someone likes my wishlist\",\n            \"email\": true,\n            \"push\": true,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 99,\n            \"title\": \"Someone likes my wish\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 149,\n            \"title\": \"New friend request\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 199,\n            \"title\": \"Accepted friend request\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 249,\n            \"title\": \"Someone tags me to their wish\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 299,\n            \"title\": \"Someone reserves my wish\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 349,\n            \"title\": \"Someone fulfils my wish\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 399,\n            \"title\": \"Send a reminder four weeks before my birthday and remind me to update my list\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        },\n        {\n            \"id\": 449,\n            \"title\": \"Send reminders for upcoming birthdays\",\n            \"email\": true,\n            \"push\": false,\n            \"created_at\": null,\n            \"updated_at\": \"2024-10-20T18:56:35.000000Z\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Update single setting",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"push\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/notification-settings/49",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"notification-settings",
+										"49"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"push\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localUrl}}/notification-settings/49",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"notification-settings",
+												"49"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Oct 2024 18:50:28 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Setting updated.\",\n    \"data\": {\n        \"id\": 49,\n        \"title\": \"Someone likes my wishlist\",\n        \"email\": true,\n        \"push\": false,\n        \"created_at\": null,\n        \"updated_at\": \"2024-10-20T18:50:28.000000Z\"\n    }\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WishlIst",
+			"item": [
+				{
+					"name": "Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/categories",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/categories",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 05 Oct 2024 08:20:06 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetched categories\",\n    \"data\": [\n        {\n            \"id\": 7,\n            \"slug\": \"anniversary\",\n            \"name\": \"Anniversary\"\n        },\n        {\n            \"id\": 3,\n            \"slug\": \"baby-shower\",\n            \"name\": \"Baby Shower\"\n        },\n        {\n            \"id\": 1,\n            \"slug\": \"birthday\",\n            \"name\": \"Birthday\"\n        },\n        {\n            \"id\": 9,\n            \"slug\": \"book\",\n            \"name\": \"Book\"\n        },\n        {\n            \"id\": 4,\n            \"slug\": \"fashion\",\n            \"name\": \"Fashion\"\n        },\n        {\n            \"id\": 8,\n            \"slug\": \"gadgets\",\n            \"name\": \"Gadgets\"\n        },\n        {\n            \"id\": 5,\n            \"slug\": \"graduation\",\n            \"name\": \"Graduation\"\n        },\n        {\n            \"id\": 11,\n            \"slug\": \"holiday\",\n            \"name\": \"Holiday\"\n        },\n        {\n            \"id\": 6,\n            \"slug\": \"house-warming\",\n            \"name\": \"House Warming\"\n        },\n        {\n            \"id\": 14,\n            \"slug\": \"others\",\n            \"name\": \"Others\"\n        },\n        {\n            \"id\": 2,\n            \"slug\": \"personal\",\n            \"name\": \"Personal\"\n        },\n        {\n            \"id\": 12,\n            \"slug\": \"pet-supply\",\n            \"name\": \"Pet Supply\"\n        },\n        {\n            \"id\": 13,\n            \"slug\": \"ramadan\",\n            \"name\": \"Ramadan\"\n        },\n        {\n            \"id\": 10,\n            \"slug\": \"travel\",\n            \"name\": \"Travel\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishlists",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch wishlists",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishlists",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 13:14:07 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetched wishlists!\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"title\": \"Cumque Fugiat Culpa\",\n            \"description\": \"Quisquam aut quia quia nobis debitis vel sed.\",\n            \"date\": \"2024-10-30\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 12,\n                \"slug\": \"pet-supply\",\n                \"name\": \"Pet Supply\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 2,\n            \"title\": \"Occaecati Facilis Rem\",\n            \"description\": \"Et ut ut eos doloribus et.\",\n            \"date\": \"2024-10-20\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 12,\n                \"slug\": \"pet-supply\",\n                \"name\": \"Pet Supply\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 3,\n            \"title\": \"Animi Quia Quidem\",\n            \"description\": \"Dolorum non ut molestias voluptatibus sapiente omnis qui.\",\n            \"date\": \"2024-10-27\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"slug\": \"birthday\",\n                \"name\": \"Birthday\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 4,\n            \"user_id\": 4,\n            \"title\": \"Dignissimos Laboriosam Porro\",\n            \"description\": \"Sapiente nobis veniam et.\",\n            \"date\": \"2024-10-19\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 5,\n                \"slug\": \"graduation\",\n                \"name\": \"Graduation\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 6,\n            \"title\": \"Quis Suscipit Sapiente\",\n            \"description\": \"Adipisci voluptate et harum quasi vero accusamus et.\",\n            \"date\": \"2024-09-25\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 4,\n                \"slug\": \"fashion\",\n                \"name\": \"Fashion\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 7,\n            \"user_id\": 7,\n            \"title\": \"Et Sint Unde\",\n            \"description\": \"Et expedita veritatis explicabo eaque.\",\n            \"date\": \"2024-09-23\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 7,\n                \"slug\": \"anniversary\",\n                \"name\": \"Anniversary\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 8,\n            \"user_id\": 8,\n            \"title\": \"Quo Eos Pariatur\",\n            \"description\": \"Dolore et qui officia natus et incidunt sunt.\",\n            \"date\": \"2024-11-04\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 13,\n                \"slug\": \"ramadan\",\n                \"name\": \"Ramadan\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 9,\n            \"user_id\": 9,\n            \"title\": \"Temporibus Nostrum Consequatur\",\n            \"description\": \"Architecto culpa quis sed rerum.\",\n            \"date\": \"2024-09-28\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 9,\n                \"slug\": \"book\",\n                \"name\": \"Book\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 10,\n            \"user_id\": 10,\n            \"title\": \"Voluptatibus Asperiores Et\",\n            \"description\": \"Illo odit iusto eum dolores reprehenderit maiores consectetur reiciendis.\",\n            \"date\": \"2024-10-07\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 5,\n                \"slug\": \"graduation\",\n                \"name\": \"Graduation\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 11,\n            \"user_id\": 11,\n            \"title\": \"Quod Aut Aliquam\",\n            \"description\": \"Et id dolor dicta.\",\n            \"date\": \"2024-10-13\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 7,\n                \"slug\": \"anniversary\",\n                \"name\": \"Anniversary\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 12,\n            \"user_id\": 12,\n            \"title\": \"Quia Animi Quam\",\n            \"description\": \"Et architecto sunt sit impedit quod dolorem sunt.\",\n            \"date\": \"2024-11-10\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 5,\n                \"slug\": \"graduation\",\n                \"name\": \"Graduation\"\n            },\n            \"friends\": []\n        },\n        {\n            \"id\": 13,\n            \"user_id\": 13,\n            \"title\": \"Neque Ut Quia\",\n            \"description\": \"Optio nam architecto esse ut doloremque quasi.\",\n            \"date\": \"2024-11-04\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"slug\": \"personal\",\n                \"name\": \"Personal\"\n            },\n            \"friends\": []\n        }\n    ],\n    \"has_next_page\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "My Home Needs",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Just a random description note for extra information",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-11-22",
+									"type": "text"
+								},
+								{
+									"key": "taggable_friends",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "visibility",
+									"value": "public",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/kdns/Downloads/2.jpg"
+								},
+								{
+									"key": "tagged_friends",
+									"value": "hi",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localUrl}}/wishlists",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Wishlist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"My birthday\",\n    \"category_id\": 7, // An id from the list of categories\n    \"description\": null, // Nullable\n    \"date\": \"2012-01-01\", // Must be a valid date\n    \"tagged_friends\": [\"muller.loren\", \"hkertzmann\"], // An array, either empty or filled with the username of users.\n    \"visibility\": \"friends\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/wishlists",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 16:07:50 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wishlist created!\",\n    \"data\": {\n        \"id\": 165,\n        \"user_id\": 165,\n        \"title\": \"My birthday\",\n        \"description\": null,\n        \"date\": \"2012-01-01\",\n        \"visibility\": \"friends\",\n        \"photo\": null,\n        \"likes_count\": 0,\n        \"views_count\": 0,\n        \"liked_by_me\": false,\n        \"viewed_by_me\": false,\n        \"created_at\": \"2024-10-06T16:07:50.000000Z\",\n        \"updated_at\": \"2024-10-06T16:07:50.000000Z\",\n        \"category\": {\n            \"id\": 7,\n            \"slug\": \"anniversary\",\n            \"name\": \"Anniversary\"\n        },\n        \"friends\": [\n            {\n                \"id\": 13,\n                \"username\": \"hkertzmann\",\n                \"first_name\": \"Rosalyn\",\n                \"last_name\": \"Stamm\",\n                \"email\": \"sreichel@example.com\",\n                \"pivot\": {\n                    \"friendable_type\": \"App\\\\Models\\\\Wishlist\",\n                    \"friendable_id\": 165,\n                    \"user_id\": 13,\n                    \"created_at\": \"2024-10-06T16:07:50.000000Z\",\n                    \"updated_at\": \"2024-10-06T16:07:50.000000Z\"\n                }\n            },\n            {\n                \"id\": 8,\n                \"username\": \"muller.loren\",\n                \"first_name\": \"Kyle\",\n                \"last_name\": \"Kerluke\",\n                \"email\": \"georgianna.mcdermott@example.net\",\n                \"pivot\": {\n                    \"friendable_type\": \"App\\\\Models\\\\Wishlist\",\n                    \"friendable_id\": 165,\n                    \"user_id\": 8,\n                    \"created_at\": \"2024-10-06T16:07:50.000000Z\",\n                    \"updated_at\": \"2024-10-06T16:07:50.000000Z\"\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"title\": \"New House\",\n//     \"category_id\": 3, // An id from the list of categories\n//     \"description\": null, // Nullable\n//     \"date\": \"2012-01-01\", // Must be a valid date\n//     \"tagged_friends\": [], // An array, either empty or filled with the username of users.\n//     \"visibility\": \"friends\"\n// }\n\n// To like/unlike a wish\n{\n    \"like\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/wishlists/17",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists",
+								"17"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Wishlist",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// {\n//     \"title\": \"New House\",\n//     \"category_id\": 3, // An id from the list of categories\n//     \"description\": null, // Nullable\n//     \"date\": \"2012-01-01\", // Must be a valid date\n//     \"tagged_friends\": [], // An array, either empty or filled with the username of users.\n//     \"visibility\": \"friends\"\n// }\n\n// To like/unlike a wish\n{\n    \"like\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/wishlists/6",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 19:34:18 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wishlist liked!\",\n    \"data\": {\n        \"id\": 6,\n        \"user_id\": 6,\n        \"title\": \"Doloribus Ab Ut\",\n        \"description\": \"Necessitatibus qui ipsa minus facere quia ad velit.\",\n        \"date\": \"2024-09-09\",\n        \"visibility\": \"public\",\n        \"photo\": null,\n        \"likes_count\": 1,\n        \"views_count\": 1,\n        \"liked_by_me\": true,\n        \"viewed_by_me\": true,\n        \"created_at\": \"2024-10-05T06:41:25.000000Z\",\n        \"updated_at\": \"2024-10-06T19:24:57.000000Z\",\n        \"category\": {\n            \"id\": 4,\n            \"slug\": \"fashion\",\n            \"name\": \"Fashion\"\n        },\n        \"friends\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishlists/5",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishlists/5",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 13:05:42 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wishlist deleted!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "View",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishlists/4",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishlists/4",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 19:33:16 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wishlist viewed!\",\n    \"data\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Quidem Porro Quia\",\n        \"description\": \"Saepe et alias beatae molestiae nemo ut accusantium.\",\n        \"date\": \"2024-10-19\",\n        \"visibility\": \"public\",\n        \"photo\": null,\n        \"likes_count\": 0,\n        \"views_count\": 1,\n        \"liked_by_me\": false,\n        \"viewed_by_me\": true,\n        \"created_at\": \"2024-10-05T06:41:25.000000Z\",\n        \"updated_at\": \"2024-10-06T19:32:02.000000Z\",\n        \"category\": {\n            \"id\": 4,\n            \"slug\": \"fashion\",\n            \"name\": \"Fashion\"\n        },\n        \"friends\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Archived",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/archived-wishlists",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"archived-wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2024 18:53:14 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetched archived wishlists\",\n    \"data\": [\n        {\n            \"id\": 687,\n            \"user_id\": 687,\n            \"title\": \"My Home Needs\",\n            \"description\": \"Just a random description note for extra information\",\n            \"date\": \"2024-11-22\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"impressions\": 0,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 0,\n            \"created_at\": \"2024-11-07T11:55:32.000000Z\",\n            \"updated_at\": \"2024-11-11T18:53:11.000000Z\",\n            \"category\": {\n                \"id\": 5,\n                \"slug\": \"graduation\",\n                \"name\": \"Graduation\"\n            },\n            \"friends\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Mark/Unmark a Wishlist as Archived",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"wishlist_id\": 687\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/archived-wishlists",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"archived-wishlists"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"wishlist_id\": 687\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/archived-wishlists",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"archived-wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2024 18:53:11 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Archived wishlist successfully\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Wish",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishlists/685/wishes",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists",
+								"685",
+								"wishes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch wishes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishlists/6/wishes",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists",
+										"6",
+										"wishes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 19:36:06 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetch wishes\",\n    \"data\": [\n        {\n            \"id\": 34,\n            \"wishlist_id\": 6,\n            \"name\": \"nesciunt quas harum\",\n            \"amount\": 135153.61825244,\n            \"currency\": \"USD\",\n            \"quantity\": 7,\n            \"priority\": \"medium\",\n            \"link\": \"http://www.johns.net/omnis-quaerat-maiores-nemo-sint.html\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 35,\n            \"wishlist_id\": 6,\n            \"name\": \"enim pariatur qui\",\n            \"amount\": 158426.4989027,\n            \"currency\": \"USD\",\n            \"quantity\": 0,\n            \"priority\": \"medium\",\n            \"link\": \"http://spinka.com/\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 36,\n            \"wishlist_id\": 6,\n            \"name\": \"accusamus cum et\",\n            \"amount\": 143542.4,\n            \"currency\": \"USD\",\n            \"quantity\": 8,\n            \"priority\": \"low\",\n            \"link\": \"http://altenwerth.com/voluptatem-velit-eaque-rerum-delectus-dolor-qui\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 37,\n            \"wishlist_id\": 6,\n            \"name\": \"accusamus aut eius\",\n            \"amount\": 126096.41460613,\n            \"currency\": \"USD\",\n            \"quantity\": 5,\n            \"priority\": \"medium\",\n            \"link\": \"http://www.heidenreich.org/nulla-aut-distinctio-qui-libero\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 38,\n            \"wishlist_id\": 6,\n            \"name\": \"quia voluptatem aliquam\",\n            \"amount\": 127133,\n            \"currency\": \"USD\",\n            \"quantity\": 2,\n            \"priority\": \"high\",\n            \"link\": \"http://www.schmeler.com/ut-repellat-officia-delectus-illum-rerum-delectus\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 39,\n            \"wishlist_id\": 6,\n            \"name\": \"iure tempore dignissimos\",\n            \"amount\": 15832.9853573,\n            \"currency\": \"USD\",\n            \"quantity\": 3,\n            \"priority\": \"medium\",\n            \"link\": \"http://ritchie.org/debitis-neque-saepe-autem-quia\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 40,\n            \"wishlist_id\": 6,\n            \"name\": \"Ford explorer\",\n            \"amount\": 20000000,\n            \"currency\": \"NGN\",\n            \"quantity\": 5,\n            \"priority\": \"medium\",\n            \"link\": \"https://www.grimes.biz/est-nobis-odit-iure-explicabo-molestiae-magnam-maxime-vitae\",\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": \"reserved\",\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n            \"updated_at\": \"2024-10-06T10:18:41.000000Z\",\n            \"likes_count\": 2,\n            \"liked_by_me\": true,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 1398,\n            \"wishlist_id\": 6,\n            \"name\": \"new balance shoe\",\n            \"amount\": 80000,\n            \"currency\": \"NGN\",\n            \"quantity\": 1,\n            \"priority\": \"high\",\n            \"link\": null,\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": null,\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T09:08:00.000000Z\",\n            \"updated_at\": \"2024-10-06T09:08:00.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        },\n        {\n            \"id\": 1399,\n            \"wishlist_id\": 6,\n            \"name\": \"new balance shoe\",\n            \"amount\": 80000,\n            \"currency\": \"NGN\",\n            \"quantity\": 1,\n            \"priority\": \"high\",\n            \"link\": null,\n            \"comment\": null,\n            \"photo\": null,\n            \"received\": false,\n            \"status\": null,\n            \"status_update_at\": null,\n            \"status_update_by\": null,\n            \"archived_at\": null,\n            \"created_at\": \"2024-10-06T09:11:58.000000Z\",\n            \"updated_at\": \"2024-10-06T09:11:58.000000Z\",\n            \"likes_count\": 0,\n            \"liked_by_me\": false,\n            \"archived\": false,\n            \"gifter\": null,\n            \"friends\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new balance shoe\",\n    \"amount\": \"80000\",\n    \"currency\": \"NGN\",\n    \"quantity\": 1,\n    \"priority\": \"high\",\n    \"tagged_friends\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/wishlists/685/wishes",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishlists",
+								"685",
+								"wishes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"new balance shoe\",\n    \"amount\": \"80000\",\n    \"currency\": \"NGN\",\n    \"quantity\": 1,\n    \"priority\": \"high\",\n    \"tagged_friends\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/wishlists/6/wishes",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishlists",
+										"6",
+										"wishes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 06:32:43 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wish added!\",\n    \"data\": {\n        \"id\": 1397,\n        \"wishlist_id\": 6,\n        \"name\": \"new balance shoe\",\n        \"amount\": 80000,\n        \"currency\": \"USD\",\n        \"quantity\": 1,\n        \"priority\": \"high\",\n        \"link\": null,\n        \"comment\": null,\n        \"photo\": null,\n        \"received\": false,\n        \"status\": \"reserved\",\n        \"status_update_at\": null,\n        \"status_update_by\": null,\n        \"archived_at\": null,\n        \"created_at\": \"2024-10-06T06:32:43.000000Z\",\n        \"updated_at\": \"2024-10-06T06:32:43.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ford explorer\",\n    \"amount\": 20000000,\n    \"currency\": \"NGN\",\n    \"quantity\": 5\n}\n\n// To archive or unarchive a wish\n// {\n//     \"archive\": true\n// }\n\n// Mark a wish as reserved or fulfiled\n// {\n//     \"status\": \"fulfiled\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/wishes/304",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishes",
+								"304"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ford explorer\",\n    \"amount\": 20000000,\n    \"currency\": \"NGN\",\n    \"quantity\": 5\n}\n\n// To archive or unarchive a wish\n// {\n//     \"archive\": true\n// }\n\n// Mark a wish as reserved or fulfiled\n// {\n//     \"status\": \"fulfiled\"\n// }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/wishes/40",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishes",
+										"40"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 09:01:55 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wish updated!\",\n    \"data\": {\n        \"id\": 40,\n        \"wishlist_id\": 6,\n        \"name\": \"Ford explorer\",\n        \"amount\": 20000000,\n        \"currency\": \"NGN\",\n        \"quantity\": 5,\n        \"priority\": \"medium\",\n        \"link\": \"https://www.grimes.biz/est-nobis-odit-iure-explicabo-molestiae-magnam-maxime-vitae\",\n        \"comment\": null,\n        \"photo\": null,\n        \"received\": false,\n        \"status\": \"reserved\",\n        \"status_update_at\": null,\n        \"status_update_by\": null,\n        \"archived_at\": \"2024-10-06 09:53:12\",\n        \"created_at\": \"2024-10-06T04:55:54.000000Z\",\n        \"updated_at\": \"2024-10-06T08:53:12.000000Z\",\n        \"archived\": true,\n        \"gifter\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/wishes/579",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishes",
+								"579"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/wishes/1397",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishes",
+										"1397"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2024 07:40:16 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wish deleted.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Reserved & Fulfiled Wish",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/gifted-wishes",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"gifted-wishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Saved Wishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/saved-wishes",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"saved-wishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save or Unsave a Wish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"wish_id\": 28\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/saved-wishes",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"saved-wishes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Saved Wish",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"wish_id\": 28\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/saved-wishes",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"saved-wishes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 01:23:04 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wish Saved!\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Unsave a wish",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"wish_id\": 28\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/saved-wishes",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"saved-wishes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 01:24:49 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Wish Unsaved!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Request Address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishes/88/address",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishes",
+								"88",
+								"address"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishes/88/address",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishes",
+										"88",
+										"address"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Oct 2024 13:28:22 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Request sent!\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Share Delivery Address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/wishes/5836/address/1",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"wishes",
+								"5836",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/wishes/5836/address/1",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"wishes",
+										"5836",
+										"address",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 26 Oct 2024 13:31:26 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Delivery address added to wish\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Explore",
+			"item": [
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Friends",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/explore/search?type=friends&value=ke",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"explore",
+										"search"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "friends"
+										},
+										{
+											"key": "value",
+											"value": "ke"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Friends",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/explore/search?type=friends&value=ke",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"explore",
+												"search"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "friends"
+												},
+												{
+													"key": "value",
+													"value": "ke"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 12 Oct 2024 12:38:19 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Search results for ke...\",\n    \"data\": [\n        {\n            \"username\": \"muller.loren\",\n            \"first_name\": \"Kyle\",\n            \"last_name\": \"Kerluke\",\n            \"email\": \"georgianna.mcdermott@example.net\",\n            \"photo\": null,\n            \"gender\": null,\n            \"dob\": null,\n            \"country\": null,\n            \"state\": null,\n            \"verified\": true,\n            \"friends_count\": 0,\n            \"likes_count\": 0,\n            \"wishlists_count\": 29,\n            \"friendship_id\": null,\n            \"friendship_status\": null\n        },\n        {\n            \"username\": \"kessler.ruth\",\n            \"first_name\": \"Nelson\",\n            \"last_name\": \"Greenfelder\",\n            \"email\": \"logan16@example.com\",\n            \"photo\": null,\n            \"gender\": null,\n            \"dob\": null,\n            \"country\": null,\n            \"state\": null,\n            \"verified\": true,\n            \"friends_count\": 1,\n            \"likes_count\": 1,\n            \"wishlists_count\": 32,\n            \"friendship_id\": 1,\n            \"friendship_status\": \"accepted\"\n        },\n        {\n            \"username\": \"langosh.kelvin\",\n            \"first_name\": \"Antonio\",\n            \"last_name\": \"McDermott\",\n            \"email\": \"scormier@example.com\",\n            \"photo\": null,\n            \"gender\": \"female\",\n            \"dob\": \"11/02\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 0,\n            \"likes_count\": 0,\n            \"wishlists_count\": 13,\n            \"friendship_id\": 4,\n            \"friendship_status\": \"rejected\"\n        },\n        {\n            \"username\": \"wuckert.elliott\",\n            \"first_name\": \"Braulio\",\n            \"last_name\": \"Kerluke\",\n            \"email\": \"antwan.gerlach@example.com\",\n            \"photo\": null,\n            \"gender\": \"male\",\n            \"dob\": \"02/13\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 0,\n            \"likes_count\": 0,\n            \"wishlists_count\": 17,\n            \"friendship_id\": 11,\n            \"friendship_status\": \"pending\"\n        },\n        {\n            \"username\": \"ashlee.kemmer\",\n            \"first_name\": \"Rose\",\n            \"last_name\": \"Bergstrom\",\n            \"email\": \"ihickle@example.net\",\n            \"photo\": null,\n            \"gender\": \"male\",\n            \"dob\": \"09/18\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 0,\n            \"likes_count\": 0,\n            \"wishlists_count\": 16,\n            \"friendship_id\": null,\n            \"friendship_status\": null\n        }\n    ],\n    \"has_next_pages\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "Wishlists",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/explore/search?type=wishlists&value=Qui",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"explore",
+										"search"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "wishlists"
+										},
+										{
+											"key": "value",
+											"value": "Qui"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Wishlists search",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localUrl}}/explore/search?type=wishlists&value=Qui",
+											"host": [
+												"{{localUrl}}"
+											],
+											"path": [
+												"explore",
+												"search"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "wishlists"
+												},
+												{
+													"key": "value",
+													"value": "Qui"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.25.4"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 12 Oct 2024 13:14:33 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Search results for Qui...\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"title\": \"Cumque Fugiat Culpa\",\n            \"description\": \"Quisquam aut quia quia nobis debitis vel sed.\",\n            \"date\": \"2024-10-30\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 12,\n                \"slug\": \"pet-supply\",\n                \"name\": \"Pet Supply\"\n            }\n        },\n        {\n            \"id\": 90,\n            \"user_id\": 90,\n            \"title\": \"Voluptas Voluptatem Nam\",\n            \"description\": \"Recusandae at consequatur qui qui sit.\",\n            \"date\": \"2024-10-06\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 8,\n                \"slug\": \"gadgets\",\n                \"name\": \"Gadgets\"\n            }\n        },\n        {\n            \"id\": 396,\n            \"user_id\": 396,\n            \"title\": \"Quis Soluta Quisquam\",\n            \"description\": \"Ut occaecati cum eveniet at quis voluptatum praesentium.\",\n            \"date\": \"2024-09-22\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n            \"category\": {\n                \"id\": 9,\n                \"slug\": \"book\",\n                \"name\": \"Book\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 3,\n            \"title\": \"Animi Quia Quidem\",\n            \"description\": \"Dolorum non ut molestias voluptatibus sapiente omnis qui.\",\n            \"date\": \"2024-10-27\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"slug\": \"birthday\",\n                \"name\": \"Birthday\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 6,\n            \"title\": \"Quis Suscipit Sapiente\",\n            \"description\": \"Adipisci voluptate et harum quasi vero accusamus et.\",\n            \"date\": \"2024-09-25\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 4,\n                \"slug\": \"fashion\",\n                \"name\": \"Fashion\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"user_id\": 8,\n            \"title\": \"Quo Eos Pariatur\",\n            \"description\": \"Dolore et qui officia natus et incidunt sunt.\",\n            \"date\": \"2024-11-04\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 13,\n                \"slug\": \"ramadan\",\n                \"name\": \"Ramadan\"\n            }\n        },\n        {\n            \"id\": 9,\n            \"user_id\": 9,\n            \"title\": \"Temporibus Nostrum Consequatur\",\n            \"description\": \"Architecto culpa quis sed rerum.\",\n            \"date\": \"2024-09-28\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 9,\n                \"slug\": \"book\",\n                \"name\": \"Book\"\n            }\n        },\n        {\n            \"id\": 12,\n            \"user_id\": 12,\n            \"title\": \"Quia Animi Quam\",\n            \"description\": \"Et architecto sunt sit impedit quod dolorem sunt.\",\n            \"date\": \"2024-11-10\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 5,\n                \"slug\": \"graduation\",\n                \"name\": \"Graduation\"\n            }\n        },\n        {\n            \"id\": 13,\n            \"user_id\": 13,\n            \"title\": \"Neque Ut Quia\",\n            \"description\": \"Optio nam architecto esse ut doloremque quasi.\",\n            \"date\": \"2024-11-04\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"slug\": \"personal\",\n                \"name\": \"Personal\"\n            }\n        },\n        {\n            \"id\": 14,\n            \"user_id\": 14,\n            \"title\": \"Hic Atque Voluptas\",\n            \"description\": \"Rerum qui eos praesentium architecto.\",\n            \"date\": \"2024-10-12\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 3,\n                \"slug\": \"baby-shower\",\n                \"name\": \"Baby Shower\"\n            }\n        },\n        {\n            \"id\": 16,\n            \"user_id\": 16,\n            \"title\": \"Voluptatem Natus Asperiores\",\n            \"description\": \"Sit quidem aperiam eum modi voluptas.\",\n            \"date\": \"2024-09-23\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"slug\": \"personal\",\n                \"name\": \"Personal\"\n            }\n        },\n        {\n            \"id\": 17,\n            \"user_id\": 17,\n            \"title\": \"Aliquam Eligendi Libero\",\n            \"description\": \"In occaecati quisquam rerum et quisquam eius sunt qui.\",\n            \"date\": \"2024-11-03\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"slug\": \"birthday\",\n                \"name\": \"Birthday\"\n            }\n        },\n        {\n            \"id\": 19,\n            \"user_id\": 19,\n            \"title\": \"Totam Non Quia\",\n            \"description\": \"Et autem itaque et error nihil.\",\n            \"date\": \"2024-09-14\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 8,\n                \"slug\": \"gadgets\",\n                \"name\": \"Gadgets\"\n            }\n        },\n        {\n            \"id\": 21,\n            \"user_id\": 21,\n            \"title\": \"Eum Aut Deserunt\",\n            \"description\": \"Quod reiciendis ipsa nostrum qui autem assumenda temporibus quia.\",\n            \"date\": \"2024-10-28\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 13,\n                \"slug\": \"ramadan\",\n                \"name\": \"Ramadan\"\n            }\n        },\n        {\n            \"id\": 23,\n            \"user_id\": 23,\n            \"title\": \"Iste Quibusdam Sunt\",\n            \"description\": \"Reiciendis nostrum rerum rem provident nihil.\",\n            \"date\": \"2024-09-15\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 13,\n                \"slug\": \"ramadan\",\n                \"name\": \"Ramadan\"\n            }\n        },\n        {\n            \"id\": 25,\n            \"user_id\": 25,\n            \"title\": \"Aperiam Qui Incidunt\",\n            \"description\": \"Distinctio dolorem dolores fugit ea accusantium.\",\n            \"date\": \"2024-09-28\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"slug\": \"birthday\",\n                \"name\": \"Birthday\"\n            }\n        },\n        {\n            \"id\": 29,\n            \"user_id\": 29,\n            \"title\": \"Odit Enim Et\",\n            \"description\": \"Quisquam voluptatum voluptatem ut id.\",\n            \"date\": \"2024-10-30\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 11,\n                \"slug\": \"holiday\",\n                \"name\": \"Holiday\"\n            }\n        },\n        {\n            \"id\": 30,\n            \"user_id\": 30,\n            \"title\": \"Autem Minus Sed\",\n            \"description\": \"Quia ab autem veritatis pariatur.\",\n            \"date\": \"2024-11-03\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"slug\": \"personal\",\n                \"name\": \"Personal\"\n            }\n        },\n        {\n            \"id\": 36,\n            \"user_id\": 36,\n            \"title\": \"Voluptatem Neque Quis\",\n            \"description\": \"Rem nemo eaque consequatur doloribus eius.\",\n            \"date\": \"2024-10-20\",\n            \"visibility\": \"tagged\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 11,\n                \"slug\": \"holiday\",\n                \"name\": \"Holiday\"\n            }\n        },\n        {\n            \"id\": 38,\n            \"user_id\": 38,\n            \"title\": \"Amet Adipisci Ducimus\",\n            \"description\": \"Minus qui tempora temporibus corporis omnis iure autem.\",\n            \"date\": \"2024-10-06\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 7,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"slug\": \"birthday\",\n                \"name\": \"Birthday\"\n            }\n        },\n        {\n            \"id\": 40,\n            \"user_id\": 40,\n            \"title\": \"Et Ratione Officiis\",\n            \"description\": \"Est aperiam atque voluptatem ullam quisquam.\",\n            \"date\": \"2024-10-09\",\n            \"visibility\": \"friends\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 9,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 3,\n                \"slug\": \"baby-shower\",\n                \"name\": \"Baby Shower\"\n            }\n        },\n        {\n            \"id\": 42,\n            \"user_id\": 42,\n            \"title\": \"Occaecati Et Incidunt\",\n            \"description\": \"Praesentium nihil quia et et quam eveniet reiciendis.\",\n            \"date\": \"2024-10-29\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 8,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"slug\": \"personal\",\n                \"name\": \"Personal\"\n            }\n        },\n        {\n            \"id\": 43,\n            \"user_id\": 43,\n            \"title\": \"Qui Illo Expedita\",\n            \"description\": \"Occaecati eius quibusdam modi.\",\n            \"date\": \"2024-11-05\",\n            \"visibility\": \"public\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 7,\n                \"slug\": \"anniversary\",\n                \"name\": \"Anniversary\"\n            }\n        },\n        {\n            \"id\": 44,\n            \"user_id\": 44,\n            \"title\": \"Ut Dolore At\",\n            \"description\": \"Deleniti quibusdam sit nulla asperiores amet et exercitationem nostrum.\",\n            \"date\": \"2024-11-02\",\n            \"visibility\": \"private\",\n            \"photo\": null,\n            \"likes_count\": 0,\n            \"views_count\": 0,\n            \"liked_by_me\": false,\n            \"viewed_by_me\": false,\n            \"wishes_count\": 10,\n            \"created_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"updated_at\": \"2024-10-12T13:04:51.000000Z\",\n            \"category\": {\n                \"id\": 14,\n                \"slug\": \"others\",\n                \"name\": \"Others\"\n            }\n        }\n    ],\n    \"has_next_pages\": true\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Wishlists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/explore/wishlists",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"explore",
+								"wishlists"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Wishlists",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/explore/wishlists",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"explore",
+										"wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 14:27:34 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Explore wishlists\",\n    \"data\": {\n        \"trending\": [],\n        \"recent\": [\n            {\n                \"id\": 650,\n                \"user_id\": 650,\n                \"title\": \"Dolores Ullam Et\",\n                \"description\": \"Autem fugiat reiciendis sint earum fugiat.\",\n                \"date\": \"2024-09-30\",\n                \"visibility\": \"tagged\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T14:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 6,\n                    \"slug\": \"house-warming\",\n                    \"name\": \"House Warming\"\n                }\n            },\n            {\n                \"id\": 643,\n                \"user_id\": 643,\n                \"title\": \"Ipsa Voluptatem Dignissimos\",\n                \"description\": \"Necessitatibus iure assumenda quae autem.\",\n                \"date\": \"2024-09-12\",\n                \"visibility\": \"private\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T14:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 10,\n                    \"slug\": \"travel\",\n                    \"name\": \"Travel\"\n                }\n            },\n            {\n                \"id\": 343,\n                \"user_id\": 343,\n                \"title\": \"Similique Rerum Voluptatem\",\n                \"description\": \"Eius velit accusantium quisquam rem.\",\n                \"date\": \"2024-09-26\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 8,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 345,\n                \"user_id\": 345,\n                \"title\": \"Distinctio Ex Qui\",\n                \"description\": \"In aliquid aut cum non similique dolores.\",\n                \"date\": \"2024-10-06\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 6,\n                    \"slug\": \"house-warming\",\n                    \"name\": \"House Warming\"\n                }\n            },\n            {\n                \"id\": 649,\n                \"user_id\": 649,\n                \"title\": \"Atque Consequatur Sapiente\",\n                \"description\": \"Nam voluptatum est qui ea et.\",\n                \"date\": \"2024-09-14\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 8,\n                    \"slug\": \"gadgets\",\n                    \"name\": \"Gadgets\"\n                }\n            },\n            {\n                \"id\": 645,\n                \"user_id\": 645,\n                \"title\": \"Aliquid Quaerat Quia\",\n                \"description\": \"Ullam blanditiis illum suscipit aperiam omnis est voluptas.\",\n                \"date\": \"2024-10-22\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 9,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 644,\n                \"user_id\": 644,\n                \"title\": \"Ea Quaerat Corporis\",\n                \"description\": \"Illum mollitia optio cumque a consequatur vel minima.\",\n                \"date\": \"2024-10-19\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 2,\n                    \"slug\": \"personal\",\n                    \"name\": \"Personal\"\n                }\n            },\n            {\n                \"id\": 642,\n                \"user_id\": 642,\n                \"title\": \"Aliquid Laborum Est\",\n                \"description\": \"Possimus quos corrupti dolorem incidunt omnis.\",\n                \"date\": \"2024-10-29\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 8,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 2,\n                    \"slug\": \"personal\",\n                    \"name\": \"Personal\"\n                }\n            },\n            {\n                \"id\": 641,\n                \"user_id\": 641,\n                \"title\": \"Et Et Magnam\",\n                \"description\": \"Aut consequatur eos voluptatum dolor aut molestiae.\",\n                \"date\": \"2024-10-14\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 12,\n                    \"slug\": \"pet-supply\",\n                    \"name\": \"Pet Supply\"\n                }\n            },\n            {\n                \"id\": 640,\n                \"user_id\": 640,\n                \"title\": \"Sunt Aliquam Neque\",\n                \"description\": \"Enim cum saepe consectetur.\",\n                \"date\": \"2024-10-31\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 9,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 10,\n                    \"slug\": \"travel\",\n                    \"name\": \"Travel\"\n                }\n            },\n            {\n                \"id\": 638,\n                \"user_id\": 638,\n                \"title\": \"Voluptatem Corrupti Quis\",\n                \"description\": \"Et et nemo itaque cum.\",\n                \"date\": \"2024-09-14\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 9,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 14,\n                    \"slug\": \"others\",\n                    \"name\": \"Others\"\n                }\n            },\n            {\n                \"id\": 635,\n                \"user_id\": 635,\n                \"title\": \"Placeat Omnis Id\",\n                \"description\": \"Qui beatae adipisci et nemo.\",\n                \"date\": \"2024-10-04\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 12,\n                    \"slug\": \"pet-supply\",\n                    \"name\": \"Pet Supply\"\n                }\n            }\n        ],\n        \"birthdays\": [\n            {\n                \"id\": 298,\n                \"user_id\": 298,\n                \"title\": \"Omnis Possimus Sed\",\n                \"description\": \"Reprehenderit quae voluptates odit sed eum.\",\n                \"date\": \"2024-09-18\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 301,\n                \"user_id\": 301,\n                \"title\": \"Unde Illo Qui\",\n                \"description\": \"Quos dolores recusandae vel dolores necessitatibus nostrum dolores quis.\",\n                \"date\": \"2024-10-01\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 325,\n                \"user_id\": 325,\n                \"title\": \"Voluptates Nulla Esse\",\n                \"description\": \"Facere saepe consequatur dignissimos eum.\",\n                \"date\": \"2024-09-20\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 343,\n                \"user_id\": 343,\n                \"title\": \"Similique Rerum Voluptatem\",\n                \"description\": \"Eius velit accusantium quisquam rem.\",\n                \"date\": \"2024-09-26\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 8,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 370,\n                \"user_id\": 370,\n                \"title\": \"Minus Rerum Sint\",\n                \"description\": \"Nemo est corporis vero.\",\n                \"date\": \"2024-11-03\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 381,\n                \"user_id\": 381,\n                \"title\": \"Et Corporis Enim\",\n                \"description\": \"Veniam cum sit nam et et.\",\n                \"date\": \"2024-09-18\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 444,\n                \"user_id\": 444,\n                \"title\": \"Ea Assumenda Autem\",\n                \"description\": \"Ipsam quisquam sit quaerat corrupti.\",\n                \"date\": \"2024-11-09\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 7,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 469,\n                \"user_id\": 469,\n                \"title\": \"Id Eveniet Rem\",\n                \"description\": \"Laudantium voluptatem voluptas accusantium eum.\",\n                \"date\": \"2024-10-12\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 500,\n                \"user_id\": 500,\n                \"title\": \"Quis Id Ab\",\n                \"description\": \"Beatae molestiae accusantium cupiditate molestiae.\",\n                \"date\": \"2024-10-06\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 8,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 514,\n                \"user_id\": 514,\n                \"title\": \"Ab Repellendus Recusandae\",\n                \"description\": \"Eum sed voluptatem blanditiis ut eveniet tenetur.\",\n                \"date\": \"2024-09-22\",\n                \"visibility\": \"friends\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 9,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 540,\n                \"user_id\": 540,\n                \"title\": \"Nisi Ut Autem\",\n                \"description\": \"Explicabo adipisci quibusdam reiciendis.\",\n                \"date\": \"2024-11-07\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 9,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            },\n            {\n                \"id\": 547,\n                \"user_id\": 547,\n                \"title\": \"Qui Voluptatum Debitis\",\n                \"description\": \"Quae doloremque unde in ut quidem tenetur cum.\",\n                \"date\": \"2024-10-26\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"likes_count\": 0,\n                \"views_count\": 0,\n                \"liked_by_me\": false,\n                \"viewed_by_me\": false,\n                \"wishes_count\": 10,\n                \"created_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"updated_at\": \"2024-10-12T13:04:52.000000Z\",\n                \"category\": {\n                    \"id\": 1,\n                    \"slug\": \"birthday\",\n                    \"name\": \"Birthday\"\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Friends",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/explore/friends",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"explore",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friends",
+			"item": [
+				{
+					"name": "Get friends",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/friends",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"friends"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get friends",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/friends",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"friends"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Oct 2024 18:55:10 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetched friends list...\",\n    \"data\": [\n        {\n            \"username\": \"fermin92\",\n            \"first_name\": \"Annabell\",\n            \"last_name\": \"Rowe\",\n            \"email\": \"cleve.hammes@example.com\",\n            \"avatar\": null,\n            \"gender\": \"female\",\n            \"dob\": \"04/30\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 1,\n            \"likes_count\": 0,\n            \"wishlists_count\": 18,\n            \"friendship_id\": 2,\n            \"friendship_status\": \"accepted\"\n        },\n        {\n            \"username\": \"duane65\",\n            \"first_name\": \"Retta\",\n            \"last_name\": \"Schoen\",\n            \"email\": \"kristin.kemmer@example.net\",\n            \"avatar\": null,\n            \"gender\": \"male\",\n            \"dob\": \"03/17\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 1,\n            \"likes_count\": 0,\n            \"wishlists_count\": 19,\n            \"friendship_id\": 3,\n            \"friendship_status\": \"accepted\"\n        },\n        {\n            \"username\": \"arnaldo31\",\n            \"first_name\": \"Willa\",\n            \"last_name\": \"Reichel\",\n            \"email\": \"brigitte47@example.org\",\n            \"avatar\": null,\n            \"gender\": \"female\",\n            \"dob\": \"07/14\",\n            \"country\": \"Nigeria\",\n            \"state\": \"Lagos\",\n            \"verified\": true,\n            \"friends_count\": 1,\n            \"likes_count\": 0,\n            \"wishlists_count\": 14,\n            \"friendship_id\": 6,\n            \"friendship_status\": \"accepted\"\n        }\n    ],\n    \"has_next_page\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Add friend",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"wuckert.elliott\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/friends/",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"friends",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Friend",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"fritsch.kaela\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/friends/",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"friends",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 12:35:12 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Friend request sent!\",\n    \"data\": {\n        \"friendship_id\": 10,\n        \"friendship_status\": \"pending\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Accept or Reject Friend Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"accepted\" // or rejected\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/friends/11",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"friends",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update friend request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"accepted\" // or rejected\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localUrl}}/friends/11",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"friends",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 12:44:14 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Friend request accepted!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Unfriend",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/friends/11",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"friends",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unfriend",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/friends/11",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"friends",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Oct 2024 12:45:22 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User removed from friends\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/notifications",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localUrl}}/notifications",
+									"host": [
+										"{{localUrl}}"
+									],
+									"path": [
+										"notifications"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.13"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2024 22:09:19 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"\",\n    \"data\": [\n        {\n            \"id\": \"0d686fcc-55af-4417-be5d-768acad6f5cb\",\n            \"type\": \"friend\",\n            \"data\": {\n                \"message\": \"accepted your friend request.\",\n                \"type\": \"friend\"\n            },\n            \"read_at\": null,\n            \"created_at\": \"2024-11-11T22:08:34.000000Z\",\n            \"updated_at\": \"2024-11-11T22:08:34.000000Z\",\n            \"action_id\": 17,\n            \"notifier\": {\n                \"id\": 17,\n                \"username\": \"joaquin08\",\n                \"avatar\": null\n            },\n            \"action\": null\n        },\n        {\n            \"id\": \"903fc9ae-b794-40f0-8d69-84c79fc88fae\",\n            \"type\": \"friend\",\n            \"data\": {\n                \"message\": \"just sent you a friend request\",\n                \"type\": \"friendship\"\n            },\n            \"read_at\": null,\n            \"created_at\": \"2024-11-11T22:04:08.000000Z\",\n            \"updated_at\": \"2024-11-11T22:04:08.000000Z\",\n            \"action_id\": 10,\n            \"notifier\": {\n                \"id\": 17,\n                \"username\": \"joaquin08\",\n                \"avatar\": null\n            },\n            \"action\": null\n        },\n        {\n            \"id\": \"183941de-1305-4fe5-bd59-163a76bce89d\",\n            \"type\": \"wishlist\",\n            \"data\": {\n                \"message\": \"liked your wishlist\",\n                \"type\": \"wishlist\"\n            },\n            \"read_at\": null,\n            \"created_at\": \"2024-11-11T21:59:27.000000Z\",\n            \"updated_at\": \"2024-11-11T21:59:27.000000Z\",\n            \"action_id\": 685,\n            \"notifier\": {\n                \"id\": 3,\n                \"username\": \"anderson.rowan\",\n                \"avatar\": null\n            },\n            \"action\": {\n                \"id\": 685,\n                \"category_id\": 5,\n                \"user_id\": 53,\n                \"title\": \"[\\\"my title\\\"]\",\n                \"description\": \"Just a random description note for extra information\",\n                \"date\": \"2024-11-21T23:00:00.000000Z\",\n                \"visibility\": \"public\",\n                \"photo\": null,\n                \"views\": null,\n                \"created_at\": \"2024-10-26T13:29:12.000000Z\",\n                \"updated_at\": \"2024-11-11T21:00:31.000000Z\",\n                \"impressions\": 8,\n                \"archived_at\": null,\n                \"wishes_count\": 3,\n                \"likes_count\": 0,\n                \"liked_by_me\": false,\n                \"category\": {\n                    \"id\": 5,\n                    \"slug\": \"graduation\",\n                    \"name\": \"Graduation\"\n                }\n            }\n        },\n        {\n            \"id\": \"fc84cbbd-f5a9-42e2-9cea-296025fe006d\",\n            \"type\": \"wishlist\",\n            \"data\": {\n                \"message\": \"fulfileded your wish\",\n                \"type\": \"wish\"\n            },\n            \"read_at\": null,\n            \"created_at\": \"2024-11-11T21:48:53.000000Z\",\n            \"updated_at\": \"2024-11-11T21:48:53.000000Z\",\n            \"action_id\": 5836,\n            \"notifier\": {\n                \"id\": 3,\n                \"username\": \"anderson.rowan\",\n                \"avatar\": null\n            },\n            \"action\": {\n                \"id\": 5836,\n                \"wishlist_id\": 685,\n                \"name\": \"new balance shoe\",\n                \"amount\": 80000,\n                \"currency\": \"NGN\",\n                \"quantity\": 1,\n                \"priority\": \"high\",\n                \"link\": null,\n                \"comment\": null,\n                \"photo\": null,\n                \"received\": false,\n                \"status\": \"fulfiled\",\n                \"status_update_at\": \"2024-10-26 15:10:40\",\n                \"status_update_by\": 53,\n                \"archived_at\": null,\n                \"created_at\": \"2024-10-26T13:29:35.000000Z\",\n                \"updated_at\": \"2024-11-11T21:50:39.000000Z\",\n                \"address_id\": 1,\n                \"delivery_address\": {\n                    \"id\": 1,\n                    \"city\": \"Ikoyi\",\n                    \"type\": \"Apartment\",\n                    \"phone\": null,\n                    \"state\": \"Lagos\",\n                    \"street\": \"117 Ozumba mbadiwe\",\n                    \"country\": \"Nigeria\",\n                    \"zip_code\": null\n                },\n                \"impressions\": 4,\n                \"likes_count\": 0,\n                \"liked_by_me\": false,\n                \"archived\": false,\n                \"address\": {\n                    \"id\": 1,\n                    \"street\": \"117 Ozumba mbadiwe\",\n                    \"type\": \"Apartment\",\n                    \"country\": \"Nigeria\",\n                    \"state\": \"Lagos\",\n                    \"city\": \"Ikoyi\",\n                    \"phone\": null,\n                    \"zip_code\": null\n                }\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Mark as read",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/notifications/a4ba12df-7c04-4698-9f96-b86870f4a555",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"notifications",
+								"a4ba12df-7c04-4698-9f96-b86870f4a555"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/notifications/a4ba12df-7c04-4698-9f96-b86870f4a555",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"notifications",
+								"a4ba12df-7c04-4698-9f96-b86870f4a555"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark all as read",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/read-notifications",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"read-notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/delete-notifications",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"delete-notifications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localUrl}}/users/fermin92",
+					"host": [
+						"{{localUrl}}"
+					],
+					"path": [
+						"users",
+						"fermin92"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localUrl}}/users/fermin92",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"users",
+								"fermin92"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.4"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 19:39:43 GMT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"\",\n    \"data\": {\n        \"username\": \"fermin92\",\n        \"first_name\": \"Annabell\",\n        \"last_name\": \"Rowe\",\n        \"email\": \"cleve.hammes@example.com\",\n        \"avatar\": null,\n        \"gender\": \"female\",\n        \"dob\": \"04/30\",\n        \"country\": \"Nigeria\",\n        \"state\": \"Lagos\",\n        \"verified\": true,\n        \"friends_count\": 1,\n        \"likes_count\": 0,\n        \"wishlists_count\": 18,\n        \"friendship_id\": 2,\n        \"friendship_status\": \"accepted\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Profile Analytics",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{localToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.request.headers.add({key: \"Accept\", value: \"applicaiton/json\"})"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localUrl",
+			"value": "http://momenthub.test/api",
+			"type": "string"
+		},
+		{
+			"key": "liveUrl",
+			"value": "https://be.momenthub.test/api",
+			"type": "string"
+		},
+		{
+			"key": "localToken",
+			"value": "1|tLjvaP65in7KJCb93vWrbFf79i13yfs5hq3JBEuJf74a58d1",
+			"type": "string"
+		},
+		{
+			"key": "stagingUrl",
+			"value": "https://ihvxmciaw0.sharedwithexpose.com/api",
+			"type": "string"
+		},
+		{
+			"key": "liveToken",
+			"value": "72|dA5FmINJAKhlzi8fus3NhMltmz5cBdykaYYvux8uf2a8a5ff",
+			"type": "string"
+		}
+	]
+}
