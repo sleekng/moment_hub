@@ -29,7 +29,6 @@
           </div>
         </div>
       </div>
-      
       <p class="text-xs text-gray-500 mt-1">{{ formatDate(notification.created_at) }}</p>
       <div v-if="notificationActions.length && notification.action_taken" class="flex mt-2 space-x-2">
         <button v-for="action in notificationActions" :key="action.text" :class="actionClass(action.primary)" class=" relative flex justify-center items-center"
@@ -45,7 +44,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { eventBus } from "@/eventBus.js";
 export default {
@@ -86,8 +84,6 @@ export default {
     notificationActions() {
       const actions = [];
       const message = this.notification.data.message;
-    
-      
 
       if (message.includes('fulfilled your wish')) {
         actions.push({ text: 'Move to archive', primary: true });
