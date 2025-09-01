@@ -30,7 +30,7 @@
         </div>
       </div>
       <p class="text-xs text-gray-500 mt-1">{{ formatDate(notification.created_at) }}</p>
-      <div v-if="notificationActions.length && notification.action_taken" class="flex mt-2 space-x-2">
+      <div v-if="notificationActions.length && notification.action_taken == false" class="flex mt-2 space-x-2">
         <button v-for="action in notificationActions" :key="action.text" :class="actionClass(action.primary)" class=" relative flex justify-center items-center"
           @click.stop="handleActionClick(action, notification)" :disabled="loadingActions[action.text]">
           <span v-if="loadingActions[action.text]" class=" absolute">

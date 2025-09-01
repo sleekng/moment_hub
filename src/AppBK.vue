@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="progress-bar"></div>
   <Alert ref="alertComponent" class=" fixed top-4 right-2 lg:top-10 lg:right-10 z-[9999999999]" />
   <div :class="{ 'blurred-content': isLoading }">
-    <AddToWishlist v-if="showAddToWishlistModal" @close="showAddToWishlistModal = false" />
+    <AddToWishlist v-if="showAddToWishlistModal" @close="showAddToWishlistModal = false" @showCategoryModal="handleShowCategoryModal" />
     <AppHeader v-if="showAppHeader && isLoggedIn" @showCategoryModal="showCategoryModal = true" @navigateToAddressSettings="setCurrentPage('delivery')" />
     <RouterView
       @shareWishlist="toggleShareMenu"
@@ -415,6 +415,10 @@ export default {
       this.wishlistCreated = false;
       this.wishlistUpdated = false;
     },
+    handleShowCategoryModal() {
+      this.showAddToWishlistModal = false;
+      this.showCategoryModal = true;
+    }
   },
 };
 </script>

@@ -74,7 +74,7 @@
 
       <!-- Modals -->
 
-      <AddToWishlist :isAddingtoWishlist="isAddingtoWishlist" @saveToWishlist="saveToWishlist"  v-if="AddToWishlistModal" :wish="wishToAdd" @close="AddToWishlistModal = false" />
+      <AddToWishlist :isAddingtoWishlist="isAddingtoWishlist" @saveToWishlist="saveToWishlist"  v-if="AddToWishlistModal" :wish="wishToAdd" @close="AddToWishlistModal = false" @showCategoryModal="handleShowCategoryModal" />
 
       <WelcomeModal v-if="showWelcomeModal" @close="closeWelcomeModal" />
 
@@ -100,7 +100,7 @@
         :isHasAddress="isHasAddress" :wish="giftReservedWish" />
 
 
-      <AnalyticsModal v-if="showAnalyticsModal" :analyticsData="analyticsData" @close="closeAnalyticsModal" />
+      <AnalyticsModal v-if="showAnalyticsModal" :analyticsData="analyticsData" @close="closeAnalyticsModal" @update:analyticsData="updateAnalyticsData" />
       <CreateWishModal v-if="showCreateWishModal" :wish="editingWish" @addWish="AddWish"
         @close="closeCreateWishModal" />
 
@@ -1016,6 +1016,14 @@ export default {
         return sortOrder === 'asc' ? comparison : -comparison;
       });
     },
+    handleShowCategoryModal() {
+      this.AddToWishlistModal = false;
+      this.$emit('showCategoryModal');
+    },
+    updateAnalyticsData(newData) {
+      this.analyticsData = newData;
+      
+    }
   },
 };
 </script>

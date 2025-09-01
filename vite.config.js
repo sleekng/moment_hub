@@ -10,6 +10,27 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base: '/', // Add base URL configuration
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+    // Ensure proper chunking
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vue-vendor': ['vue', 'vue-router'],
+          'chart-vendor': ['chart.js', 'chartjs-adapter-date-fns'],
+          'utils-vendor': ['axios', 'date-fns', 'jwt-decode', 'mitt'],
+        },
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

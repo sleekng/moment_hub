@@ -2,7 +2,7 @@
   <div class="bg-gray-100 pb-10">
 <!--     <AppHeader  @showCategoryModal="$emit('showCategoryModal')" /> -->
 
-    <div v-if="!loading" class="container mx-auto pt-20">
+    <div v-if="!loading" class="container mx-auto pt-14 lg:pt-20">
       <WishlistDetails v-if=" !isLoggedIn"  :canShow="isLoggedIn" @editWishlist="handleEditWishlist" :selectedWishlist="currentWishlist" :filteredWishes="filteredWishes"/>
 
       <WishlistDetails v-else  :canShow="currentUser?.username === currentWishlist?.user.username" @editWishlist="handleEditWishlist" :selectedWishlist="currentWishlist" :filteredWishes="filteredWishes"/>
@@ -14,7 +14,7 @@
         :activeTab="activeTab" 
         @switchTab="setActiveTab" 
         @sort="handleSort"
-        class=" py-8"
+        class="py-4 lg:py-8"
       />
 
       <div v-if=" isLoggedIn" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4   w-full gap-4 lg:gap-6 px-4 lg:px-12 py-6 pb-12 bg-white rounded-b-lg " @mouseleave="handleCloseDropdown">
@@ -27,7 +27,7 @@
             :showButton="true"
             buttonText="Add wish"
             :userOwnsWishlist="currentUser?.username === currentWishlist?.user.username"
-            @button-click="openCreateWishModal"
+            @button-click="handleEmptyStateButtonClick"
           />
         </div>
 
@@ -90,7 +90,7 @@
             :showButton="true"
             buttonText="Add wish"
             :userOwnsWishlist="currentUser?.username === currentWishlist?.user.username"
-            @button-click="openCreateWishModal"
+            @button-click="handleEmptyStateButtonClick"
           />
   </div>
 
@@ -132,7 +132,7 @@
     <!-- Modals -->
 
 
-    <AddToWishlist     :isAddingtoWishlist="isAddingtoWishlist" @saveToWishlist="saveToWishlist" v-if="AddToWishlistModal" :wish="wishToAdd" @close="AddToWishlistModal = false" />
+    <AddToWishlist     :isAddingtoWishlist="isAddingtoWishlist" @saveToWishlist="saveToWishlist" v-if="AddToWishlistModal" :wish="wishToAdd" @close="AddToWishlistModal = false" @showCategoryModal="handleShowCategoryModal" />
 
     <WishDetailView 
 
@@ -149,7 +149,7 @@
       v-if="showWishDetailsModal" 
       @close="closeWishDetailsModal" 
       :wish="showPrevWish"
-      :loggedInUser="currentUser.username"
+      :loggedInUser="currentUser?.username || ''"
        @reserved="reservedWish"
        @requestAddress="requestAddress"
        :isRequestingAddress="isRequestingAddress"
@@ -273,6 +273,22 @@
   <Loader :show="loading" />
 </template>
 
+<style scoped>
+.highlight-wish {
+  animation: highlightPulse 3s ease-in-out;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.8);
+  }
+}
+</style>
+
 <script>
 import axios from 'axios';
 import Loader from '@/components/Loader.vue';
@@ -289,6 +305,7 @@ import EmptyState from '@/components/Dashboard/EmptyState.vue';
 import GiftReservedModal from '@/components/GiftReservedModal.vue';
 import { isTokenExpired } from "@/router/index.js"; // Import the function
 import AddToWishlist from '@/components/AddToWishlist.vue';
+import { socialPreviewManager } from '@/utils/socialPreview.js';
 
 
 export default {
@@ -389,20 +406,42 @@ export default {
       
       this.loadCurrentUser(); // Load user data when component is created
     }
-    this.loadData();
+    
+    // Check if this is an individual wish route
+    if (this.$route.name === 'Wish' && this.$route.params.id) {
+      await this.handleIndividualWishRoute(this.$route.params.id);
+    } else {
+      this.loadData();
+    }
   },
   mounted() {
    console.log();
    
   },
+  unmounted() {
+    // Reset social preview to default when component is unmounted
+    socialPreviewManager.resetToDefault();
+  },
   methods: {
 
+    redirectToLogin() {
+      this.$router.push('/login');
+    },
+
     showAddToWishlistModal(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.wishToAdd = wish;
       this.AddToWishlistModal = true;
     },
 
     async saveToWishlist(wish,  selectedWishlistId) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
 
       this.isAddingtoWishlist = true; // Start loading state
 
@@ -444,6 +483,10 @@ export default {
 
 
     async markAsReceived(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
   
       this.isReceiving = true;
       try {
@@ -479,6 +522,10 @@ export default {
       }
     },
     async markAsUnreceived(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.isUnReceiving = true;
       try {
       const response =  await this.$axios.put(
@@ -513,6 +560,10 @@ export default {
     },
 
     async reserveWish(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       
     
       this.isReserving = true; // Start loading state
@@ -572,6 +623,10 @@ export default {
     },
 
     async markAsFulfilled(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
 
       this.isFulfilling = true;
       try {
@@ -608,6 +663,10 @@ export default {
       }
     },
     async cancelReservation(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       eventBus.setLoading(true);
       try {
       const response =  await this.$axios.put(
@@ -642,6 +701,10 @@ export default {
     },
 
     async removeFromFulfiled(wishId) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       eventBus.setLoading(true);
       try {
        const response = await this.$axios.put(
@@ -678,6 +741,10 @@ export default {
     },
 
         async hasAddressClicked(wishId) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
 
       try {
         const wishlistId = this.$route.params.id;
@@ -697,6 +764,10 @@ export default {
     },
 
     reservedWish(wish){
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.giftReservedWish = wish
       this.showGiftReservedModal=true
       this.loadData();
@@ -704,12 +775,25 @@ export default {
 
 
     toggleShareMenu() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       console.log('working');
       
       this.isShareMenuOpen = !this.isShareMenuOpen;
+      
+      // Update social preview when share menu is opened
+      if (this.isShareMenuOpen && this.currentWishlist) {
+        socialPreviewManager.updateWishlistPreview(this.currentWishlist);
+      }
     },
 
     copyLink() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const message = this.currentUser?.username === this.currentWishlist?.user.username
         ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
@@ -719,6 +803,10 @@ export default {
       });
     },
     shareToEmail() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -733,6 +821,10 @@ export default {
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -742,6 +834,10 @@ export default {
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -751,6 +847,10 @@ export default {
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const url = encodeURIComponent(wishlistUrl);
       window.open(
@@ -761,6 +861,10 @@ export default {
 
 
     handleUpdateSavedStatus(wishId, isSaved) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.loadData();
     },
 
@@ -780,11 +884,16 @@ export default {
 
     
     loadCurrentUser() {
-    const userData = JSON.parse(localStorage.getItem('user'));
+    const userData = localStorage.getItem('user');
     if (userData) {
-      this.currentUser = userData;
+      try {
+        this.currentUser = JSON.parse(userData);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        this.currentUser = null;
+      }
     } else {
-      this.currentUser = []; // Explicitly set to null if no user data
+      this.currentUser = null; // Set to null if no user data
     }
   },
     async loadData() {
@@ -795,13 +904,70 @@ export default {
           this.fetchWishlistDetails(wishlistId),
           this.fetchWishes(wishlistId),
         ]);
+
+        // Update social preview after loading wishlist data
+        if (this.currentWishlist) {
+          socialPreviewManager.updateWishlistPreview(this.currentWishlist);
+        }
+
+        // Check if we need to highlight a specific wish
+        if (this.$route.query.highlight) {
+          this.highlightWish(this.$route.query.highlight);
+        }
       } catch (error) {
         console.error('Failed to load data:', error);
       } finally {
         this.loading = false;
       }
     },
+
+    async handleIndividualWishRoute(wishId) {
+      this.loading = true;
+      try {
+        // Fetch the wish details to get the wishlist ID
+        const response = await this.$axios.get(`${this.$baseURL}/wishes/${wishId}`);
+        const wish = response.data.data;
+        
+        if (wish && wish.wishlist_id) {
+          // Redirect to the wishlist with the wish highlighted
+          this.$router.replace({
+            name: 'Wishlist',
+            params: { 
+              id: wish.wishlist_id, 
+              username: wish.wishlist?.user?.username || 'user'
+            },
+            query: { highlight: wishId }
+          });
+        } else {
+          // If wish not found, redirect to home
+          this.$router.replace({ name: 'Home' });
+        }
+      } catch (error) {
+        console.error('Error fetching wish:', error);
+        // If error, redirect to home
+        this.$router.replace({ name: 'Home' });
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    highlightWish(wishId) {
+      // Find the wish and scroll to it
+      const wishElement = document.querySelector(`[data-wish-id="${wishId}"]`);
+      if (wishElement) {
+        wishElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add a temporary highlight effect
+        wishElement.classList.add('highlight-wish');
+        setTimeout(() => {
+          wishElement.classList.remove('highlight-wish');
+        }, 3000);
+      }
+    },
     handleEditWishlist(wishlist) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.$emit('showCreateWishlistModal', wishlist.category, wishlist);
     },
     closeCreatedModal() {
@@ -837,6 +1003,10 @@ export default {
       }
     },
     async handleDeleteWish(wishId) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.wishToDelete = wishId;
       this.showDeleteModal = true;
     },
@@ -864,11 +1034,19 @@ export default {
       this.editingWish = null;
     },
     openCreateWishModal() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.editingWish = null;
       this.wishCreated = this.wishUpdated = false;
       this.showCreateWishModal = true;
     },
     openEditWishModal(wish) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.editingWish = { ...wish };
       this.showWishDetailsModal = false;
       this.showCreateWishModal = true;
@@ -887,6 +1065,10 @@ export default {
       this.activeTab = tab;
     },
     handleToggleDropdown(wishId) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.openDropdownId = this.openDropdownId === wishId ? null : wishId;
     },
     handleCloseDropdown() {
@@ -914,6 +1096,10 @@ export default {
     },
 
     async requestAddress(wishID) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       console.log('woking');
           this.isRequestingAddress = true
           
@@ -943,6 +1129,10 @@ export default {
         },
         
     async hasAddress(wishID) {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       eventBus.setLoading(true);
           this.isHasAddress = true
           
@@ -1017,6 +1207,22 @@ export default {
         return sortOrder === 'asc' ? comparison : -comparison;
       });
     },
+    handleEmptyStateButtonClick() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
+      this.openCreateWishModal();
+    },
+
+    handleShowCategoryModal() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
+      this.AddToWishlistModal = false;
+      this.$emit('showCategoryModal');
+    }
 
   }
 };

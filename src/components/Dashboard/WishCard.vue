@@ -9,7 +9,7 @@
 
     <div
       @click="preview"
-         
+      :data-wish-id="wish.id"
       class="bg-white cursor-pointer rounded-lg shadow-lg overflow-hidden relative card group flex-shrink-0 md:w-auto h-[208px] lg:min-h-[360px] lg:min-w-[286px]"
     >
       <div class="lg:relative">
@@ -786,6 +786,7 @@
 import DateFormat from "./DateFormat.vue";
 import { eventBus } from "@/eventBus.js";
 import { isTokenExpired } from "@/router/index.js"; // Import the function
+import { socialPreviewManager } from '@/utils/socialPreview.js';
 
 export default {
   name: "WishCard",
@@ -917,6 +918,11 @@ export default {
 
     toggleShareMenu() {
       this.isShareMenuOpen = !this.isShareMenuOpen;
+      
+      // Update social preview when share menu is opened
+      if (this.isShareMenuOpen) {
+        socialPreviewManager.updateWishPreview(this.wish);
+      }
     },
     copyLink() {
       const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
@@ -1103,10 +1109,6 @@ export default {
         return localStorage.getItem('authToken') || '';
       },
     preview() {
-      if (!this.isLoggedIn) {
-        this.redirectToLogin();
-        return;
-      }
       this.$emit("preview", this.wish.id, this.isWishSaved);
     },
     closeMenu() {

@@ -128,11 +128,14 @@
           if (response.data.success) {
             this.user = response.data.data;
             console.log(this.user);
-            
             this.wishlists = this.user.wishlists || [];
           }
         } catch (error) {
-          console.error('Error fetching user profile:', error);
+          if (error.response && error.response.data && error.response.data.message === "User not found") {
+            this.$router.replace({ name: "NotFound" });
+          } else {
+            console.error('Error fetching user profile:', error);
+          }
         } finally {
           this.loading = false;
         }

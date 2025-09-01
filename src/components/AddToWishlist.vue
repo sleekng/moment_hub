@@ -49,7 +49,10 @@
         </div>
       </div>
       <div class="flex justify-between items-center px-5 py-4 border-t">
-        <button class="flex items-center bg-none border py-2 px-4 rounded-full text-base font-normal cursor-pointer">
+        <button 
+          @click="createNewWishlist"
+          class="flex items-center bg-none border py-2 px-4 rounded-full text-base font-normal cursor-pointer hover:bg-gray-50"
+        >
           <i class="fa-solid fa-plus text-sm mr-2" alt="Add Icon"></i>
           Create a new wishlist
         </button>
@@ -129,6 +132,9 @@ export default {
     },
     saveToWishlist() {
       this.$emit('saveToWishlist', this.wish, this.selectedWishlistId);
+    },
+    createNewWishlist() {
+      this.$emit('showCategoryModal');
     }
   },
   mounted() {

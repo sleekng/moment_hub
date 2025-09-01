@@ -62,7 +62,7 @@
           :key="wish.id" 
           :wish="wish" 
           @preview="prevWish" 
-          :loggedInUser="currentUser.username"
+          :loggedInUser="currentUser?.username || ''"
           :openDropdownId="openDropdownId" 
           @deleteWish="handleDeleteWish"
           @toggleDropdown="handleToggleDropdown" 
@@ -83,7 +83,7 @@
       v-if="showWishDetailsModal" 
       @close="closeWishDetailsModal" 
       :wish="showPrevWish"
-      :loggedInUser="currentUser.username"
+      :loggedInUser="currentUser?.username || ''"
        @reserved="reservedWish"
        @requestAddress="requestAddress"
        :isRequestingAddress="isRequestingAddress"
@@ -254,9 +254,16 @@ export default {
 
     
     loadCurrentUser() {
-      const userData = JSON.parse(localStorage.getItem('user'));
+      const userData = localStorage.getItem('user');
       if (userData) {
-        this.currentUser = userData;
+        try {
+          this.currentUser = JSON.parse(userData);
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          this.currentUser = null;
+        }
+      } else {
+        this.currentUser = null;
       }
     },
     async loadData() {

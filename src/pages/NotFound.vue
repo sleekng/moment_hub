@@ -1,59 +1,66 @@
 <template>
-  <div class="link-list">
-    <h2>Navigation Links</h2>
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/dashboard">Dashboard</router-link></li>
-      <li><router-link to="/explore">Explore</router-link></li>
-      <li><router-link to="/account">Account</router-link></li>
-      <li><router-link to="/archived">Archived</router-link></li>
-      <li><router-link to="/view-archived">View Archived</router-link></li>
-      <li><router-link to="/wishlist">All My Wishes</router-link></li>
-      <li><router-link to="/wishlist">Wishlist</router-link></li>
-      <li><router-link to="/friends">Friends</router-link></li>
-      <li><router-link to="/profile">Profile</router-link></li>
-      <li><router-link to="/login">Login</router-link></li>
-      <li><router-link to="/register">Register</router-link></li>
-      <li><router-link to="/create-option">Create Option</router-link></li>
-      <li><router-link to="/forgot-password">Forgot Password</router-link></li>
-      <li><router-link to="/password-reset">Reset Password</router-link></li>
-      <li><router-link to="/verification-sent">Verification Sent</router-link></li>
-      <li><router-link to="/basic-info">Sign Up</router-link></li>
-      <li><router-link to="/additional-info">Sign Up 2</router-link></li>
-      <!-- Optional: Not Found Link -->
-      <li><router-link to="/not-found">Not Found</router-link></li>
-    </ul>
-    
+  <div class="min-h-screen bg-white flex flex-col">
+    <!-- Header with Logo -->
+    <header class="flex justify-center items-center py-6 px-4 border-b border-gray-200">
+      <router-link to="/">
+        <img src="/assets/logo.svg" alt="Moments Hub Logo" class="h-10" />
+      </router-link>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex justify-center items-center px-4">
+      <div class="text-center max-w-md">
+        <!-- 404 Illustration -->
+        <img 
+          src="/assets/gift-empty.svg" 
+          alt="404 Illustration" 
+          class="w-32 h-32 mx-auto mb-8 opacity-60"
+        />
+        
+        <!-- Error Number -->
+        <h1 class="text-6xl font-bold text-gray-300 mb-4" style="font-family: 'Mukta', sans-serif;">
+          404
+        </h1>
+        
+        <!-- Main Message -->
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4" style="font-family: 'Mukta', sans-serif;">
+          Oops! Page not found
+        </h2>
+        
+        <!-- Subtitle -->
+        <p class="text-gray-600 mb-8 text-lg" style="font-family: 'Mukta', sans-serif;">
+          The page you're looking for seems to have wandered off. Let's get you back to exploring amazing wishlists!
+        </p>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <router-link 
+            to="/" 
+            class="bg-[#E567F8] text-white font-semibold py-3 px-8 rounded-full hover:bg-[#d14ee8] transition-colors duration-200 text-lg"
+            style="font-family: 'Mukta', sans-serif;"
+          >
+            Go Home
+          </router-link>
+          
+          <router-link 
+            to="/explore" 
+            class="border-2 border-[#E567F8] text-[#E567F8] font-semibold py-3 px-8 rounded-full hover:bg-[#E567F8] hover:text-white transition-colors duration-200 text-lg"
+            style="font-family: 'Mukta', sans-serif;"
+          >
+            Explore Wishlists
+          </router-link>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavigationLinks',
+  name: 'NotFound',
 };
 </script>
 
 <style scoped>
-.link-list {
-  font-family: 'Mukta', sans-serif;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-}
-
-router-link {
-  text-decoration: none;
-  color: #3b82f6; /* Link color */
-  font-weight: bold;
-}
-
-router-link:hover {
-  text-decoration: underline;
-}
+/* Additional styles if needed */
 </style>

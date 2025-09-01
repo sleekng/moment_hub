@@ -1,7 +1,7 @@
 <template>
 
 
-    <div v-if="selectedWishlist" class="wishlist-cover mt-10 rounded-t-lg px-4 lg:p-12 pt-8 pb-4 relative" 
+    <div v-if="selectedWishlist" class="wishlist-cover  lg:mt-10 lg:rounded-t-lg px-4 lg:p-12 pt-8 pb-4 relative" 
     :style="{ 
       background: selectedWishlist.category.name === 'Birthday' 
         ? 'linear-gradient(180deg, rgba(247,204,253,1) 10.74%, rgba(252,236,255,1) 103.53%)'
@@ -137,6 +137,9 @@
 
 <script>
 import { eventBus } from '@/eventBus.js';
+import { isTokenExpired } from "@/router/index.js";
+import { socialPreviewManager } from '@/utils/socialPreview.js'; // Import the function
+
 export default {
   name: 'WishlistDetails',
   props: {
@@ -166,21 +169,48 @@ export default {
       isShareMenuOpen: false,
     }
   },
+  computed: {
+    isLoggedIn() {
+      // Check if the user is logged in by verifying the token
+      return localStorage.getItem('authToken') && !isTokenExpired();
+    },
+  },
   mounted() {
    console.log(this.selectedWishlist);
    
   },
   methods: {
+    redirectToLogin() {
+      this.$router.push('/login');
+    },
+
     toggleMenu() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.isDropdownOpen = !this.isDropdownOpen;
     },
     closeMenu() {
       this.isDropdownOpen = false;
     },
     toggleShareMenu() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.isShareMenuOpen = !this.isShareMenuOpen;
+      
+      // Update social preview when share menu is opened
+      if (this.isShareMenuOpen && this.selectedWishlist) {
+        socialPreviewManager.updateWishlistPreview(this.selectedWishlist);
+      }
     },
     copyLink() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const message = this.canShow
         ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
@@ -190,6 +220,10 @@ export default {
       });
     },
     shareToEmail() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.canShow
@@ -204,6 +238,10 @@ export default {
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const text = encodeURIComponent(
         this.canShow
@@ -213,6 +251,10 @@ export default {
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const text = encodeURIComponent(
         this.canShow
@@ -222,6 +264,10 @@ export default {
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const url = encodeURIComponent(wishlistUrl);
       window.open(
@@ -230,6 +276,10 @@ export default {
       );
     },
     async toggleLike() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       try {
         const likeStatus = !this.selectedWishlist.liked_by_me;
         const response = await this.$axios.put(`${this.$baseURL}/wishlists/${this.selectedWishlist.id}`, {
@@ -254,7 +304,13 @@ export default {
 .wishlist-cover {
   position: relative;
   overflow: hidden;
-  min-height: 302px;
+  min-height: 280px;
+}
+
+@media (max-width: 768px) {
+  .wishlist-cover {
+    min-height: 260px;
+  }
 }
 
 button {

@@ -14,7 +14,7 @@
         :dateRange="selectedDateRange" 
       />
       <AudiencePieChart class="h-auto" :audienceData="analyticsData.pieChart" />
-    </div>
+    </div>/
   </div>
 </template>
 
@@ -51,30 +51,25 @@ export default {
     }
   },
   methods: {
-    handleDateRangeChange(days) {
-      this.selectedDateRange = days;
+    async handleDateRangeChange(startDate) {
+      this.selectedDateRange = startDate;
       this.isInitialLoad = false;
-      this.filterWishDataForRange(days);
-    },
-    filterWishDataForRange(days) {
-      const endDate = new Date();
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - parseInt(days));
-
-      // Helper function to filter data by date range
-      const filterByDateRange = (dataArray) => {
-        return (dataArray || []).filter(item => {
-          const itemDate = new Date(item.date);
-          return itemDate >= startDate && itemDate <= endDate;
+      try {
+        const headers = { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` };
+        const [analyticsResponse, pieChartResponse, wishGraphResponse] = await Promise.all([
+          this.$axios.get(`${this.$baseURL}/analytics?start_date=${startDate}`, { headers }),
+          this.$axios.get(`${this.$baseURL}/analytics/pie-chart`, { headers }),
+          this.$axios.get(`${this.$baseURL}/analytics/wish-graph?start_date=${startDate}`, { headers })
+        ]);
+        this.$emit('update:analyticsData', {
+          ...analyticsResponse.data.data,
+          pieChart: pieChartResponse.data.data,
+          wishGraph: wishGraphResponse.data.data
         });
-      };
-
-      // Filter each type of wish data from the original source
-      this.filteredWishData = {
-        reserved: filterByDateRange(this.analyticsData.wishGraph.reserved),
-        fulfilled: filterByDateRange(this.analyticsData.wishGraph.fulfilled),
-        received: filterByDateRange(this.analyticsData.wishGraph.received)
-      };
+        console.log('Emitted updated analyticsData');
+      } catch (error) {
+        console.error('Failed to fetch analytics data:', error);
+      }
     }
   }
 };

@@ -314,9 +314,10 @@
                   class="w-4 h-4"
                 />
                 <span>Event date: </span>
+           
                 <span class="font-bold text-black">
                   <DateFormat
-                    :date="wish.created_at"
+                    :date="wish.wishlist.date"
                     :classList="'text-[16px] font-bold text-black'"
                   />
                 </span>
@@ -1127,6 +1128,7 @@
 import DateFormat from "@/components/Dashboard/DateFormat.vue";
 import { wishOwnerMixin } from "@/mixins/wishOwnerMixin.js";
 import { eventBus } from "@/eventBus.js";
+import { isTokenExpired } from "@/router/index.js"; // Import the function
 
 export default {
   name: "WishDetailView",
@@ -1177,7 +1179,7 @@ export default {
         CAD: 'C$',
         GHS: '₵'
       },
-      user:JSON.parse(localStorage.getItem('user')),
+      user: JSON.parse(localStorage.getItem('user')) || null,
     };
   },
   // Add a watch to update local state when prop changes
@@ -1187,6 +1189,10 @@ export default {
     },
   },
   computed: {
+    isLoggedIn() {
+      // Check if the user is logged in by verifying the token
+      return localStorage.getItem('authToken') && !isTokenExpired();
+    },
     isDashboard() {
       return this.$route.path === "/dashboard";
     },
@@ -1229,7 +1235,15 @@ export default {
    
   },
   methods: {
+    redirectToLogin() {
+      this.$router.push('/login');
+    },
+
     showAddToWishlistModal() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.$emit('showAddToWishlistModal', this.wish);
       this.closeModal();
     },
@@ -1238,6 +1252,10 @@ export default {
       return this.currencySymbols[currency] || currency;
     },
     async toggleSaveWish() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       eventBus.setLoading(true);
       try {
         if (!this.localIsWishSaved) {
@@ -1314,6 +1332,10 @@ export default {
     },
 
     async toggleLike() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       try {
         const likeStatus = !this.wish.liked_by_me;
         const response = await this.$axios.put(
@@ -1340,6 +1362,10 @@ export default {
       this.$emit("close");
     },
     toggleMenu() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.isDropdownOpen = !this.isDropdownOpen;
     },
     closeMenu() {
@@ -1347,12 +1373,20 @@ export default {
     },
 
     toggleShareMenu() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       this.isShareMenuOpen = !this.isShareMenuOpen;
     },
     closeModal() {
       this.$emit("close");
     },
     copyLink() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishUrl = `${this.$website}/wishlist/${this.wish.wishlist_id}/${this.user.username}`;
       const message = this.isWishOwner 
         ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${wishUrl}`
@@ -1362,6 +1396,10 @@ export default {
       });
     },
     shareToEmail() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishUrl = `${this.$website}/wishlist/${this.wish.wishlist_id}/${this.user.username}`;
       const subject = encodeURIComponent(
         this.isWishOwner
@@ -1376,6 +1414,10 @@ export default {
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishUrl = `${this.$website}/wishlist/${this.wish.wishlist_id}/${this.user.username}`;
       const text = encodeURIComponent(
         this.isWishOwner
@@ -1385,6 +1427,10 @@ export default {
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishUrl = `${this.$website}/wishlist/${this.wish.wishlist_id}/${this.user.username}`;
       const text = encodeURIComponent(
         this.isWishOwner
@@ -1394,6 +1440,10 @@ export default {
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
+      if (!this.isLoggedIn) {
+        this.redirectToLogin();
+        return;
+      }
       const wishUrl = `${this.$website}/wishlist/${this.wish.wishlist_id}/${this.user.username}`;
       const url = encodeURIComponent(wishUrl);
       window.open(

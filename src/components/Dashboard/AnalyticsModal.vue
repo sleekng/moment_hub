@@ -4,6 +4,7 @@
       <ProfileAnalytics 
         :analyticsData="analyticsData" 
         @close="closeModal" 
+        @update:analyticsData="updateAnalyticsData"
       />
     </div>
   </div>
@@ -25,6 +26,9 @@ export default {
   methods: {
     closeModal() {
       this.$emit('close');
+    },
+    updateAnalyticsData(newData) {
+      this.$emit('update:analyticsData', newData);
     }
   }
 };

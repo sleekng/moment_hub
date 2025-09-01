@@ -249,9 +249,16 @@ export default {
     },
 
     loadCurrentUser() {
-      const userData = JSON.parse(localStorage.getItem('user'));
+      const userData = localStorage.getItem('user');
       if (userData) {
-        this.currentUser = userData;
+        try {
+          this.currentUser = JSON.parse(userData);
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          this.currentUser = null;
+        }
+      } else {
+        this.currentUser = null;
       }
     },
 
@@ -278,7 +285,7 @@ export default {
         this.redirectToLogin();
         return;
       }
-      this.$emit('shareWishlist', this.wishlist.id, this.user.username ? this.user.username : this.currentUser.username);
+      this.$emit('shareWishlist', this.wishlist.id, this.user.username ? this.user.username : this.currentUser?.username || '');
     },
 
     viewWishlist() {
@@ -287,7 +294,7 @@ export default {
         return;
       }
       const routeParams = this.isWishOwner
-        ? { id: this.wishlist.id, username: this.currentUser.username }
+        ? { id: this.wishlist.id, username: this.currentUser?.username || '' }
         : { id: this.wishlist.id, username: this.user.username };
       this.$router.push({ name: 'Wishlist', params: routeParams });
     },

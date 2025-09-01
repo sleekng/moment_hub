@@ -59,7 +59,12 @@ export default {
     selectDateRange(range) {
       this.selectedRange = range;
       this.isDropdownOpen = false;
-      this.$emit('dateRangeChanged', range.value);
+      // Calculate start date in YYYY-MM-DD format
+      const endDate = new Date();
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - parseInt(range.value));
+      const startDateStr = startDate.toISOString().split('T')[0];
+      this.$emit('dateRangeChanged', startDateStr);
     }
   },
   mounted() {
