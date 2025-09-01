@@ -395,6 +395,14 @@ export default {
    console.log();
    
   },
+  watch: {
+    '$route'(to, from) {
+      // Update meta tags when route changes (different wishlist)
+      if (to.params.id !== from.params.id) {
+        this.loadData();
+      }
+    }
+  },
   methods: {
 
     redirectToLogin() {
@@ -763,10 +771,9 @@ export default {
         return;
       }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
-      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const message = this.currentUser?.username === this.currentWishlist?.user.username
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
-        : `Check out this wishlist: ${socialPreviewUrl}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+        : `Check out this wishlist: ${wishlistUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
@@ -776,16 +783,16 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
           ? `Check out my wishlist on Moments Hub`
-          : `Check out this wishlist: ${this.currentWishlist.name}`
+          : `Check out this wishlist: ${this.currentWishlist.title}`
       );
       const body = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
-          : `Check out this wishlist: ${socialPreviewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
@@ -794,11 +801,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
-          : `Check out this wishlist: ${socialPreviewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
@@ -807,11 +814,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
-          : `Check out this wishlist: ${socialPreviewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
@@ -820,8 +827,8 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
-      const url = encodeURIComponent(socialPreviewUrl);
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const url = encodeURIComponent(wishlistUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"
@@ -992,75 +999,41 @@ export default {
     },
     async fetchWishlistDetails(wishlistId) {
       try {
-        const response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}`, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
-        });
-        this.currentWishlist = response.data.data;
+        // Try with authentication first
+        let response;
+        try {
+          response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+          });
+        } catch (authError) {
+          // If authenticated request fails, try without authentication (public access)
+          response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}`);
+        }
         
-        // Update social media meta tags for this wishlist
-        this.updateSocialMetaTags();
+        this.currentWishlist = response.data.data;
+        // Update meta tags for social media preview
+        this.updateMetaTags();
       } catch (error) {
         console.error('Error fetching wishlist details:', error);
       }
     },
     async fetchWishes(wishlistId) {
       try {
-        const response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}/wishes`, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
-        });
+        // Try with authentication first
+        let response;
+        try {
+          response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}/wishes`, {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+          });
+        } catch (authError) {
+          // If authenticated request fails, try without authentication (public access)
+          response = await this.$axios.get(`${this.$baseURL}/wishlists/${wishlistId}/wishes`);
+        }
+        
         this.wishes = response.data.data;
       } catch (error) {
         console.error('Error fetching wishes:', error);
       }
-    },
-
-    updateSocialMetaTags() {
-      if (!this.currentWishlist) return;
-
-      const wishlist = this.currentWishlist;
-      const baseUrl = window.location.origin;
-      const currentUrl = window.location.href;
-
-      // Create dynamic title
-      const title = `${wishlist.name} - ${wishlist.user.username}'s Wishlist | Moment Hub`;
-      
-      // Create dynamic description
-      const description = wishlist.description || 
-        `Check out ${wishlist.user.username}'s amazing wishlist on Moment Hub. Discover perfect gift ideas and make gifting meaningful!`;
-      
-      // Get wishlist image or use default
-      const imageUrl = wishlist.photo ? 
-        `${baseUrl}/storage/${wishlist.photo}` : 
-        `${baseUrl}/assets/Logo.png`;
-
-      // Update meta tags dynamically
-      this.updateMetaTag('title', title);
-      this.updateMetaTag('description', description);
-      this.updateMetaTag('og:title', title);
-      this.updateMetaTag('og:description', description);
-      this.updateMetaTag('og:image', imageUrl);
-      this.updateMetaTag('og:url', currentUrl);
-      this.updateMetaTag('twitter:title', title);
-      this.updateMetaTag('twitter:description', description);
-      this.updateMetaTag('twitter:image', imageUrl);
-      this.updateMetaTag('twitter:card', 'summary_large_image');
-    },
-
-    updateMetaTag(property, content) {
-      let meta = document.querySelector(`meta[property="${property}"]`) || 
-                 document.querySelector(`meta[name="${property}"]`);
-      
-      if (!meta) {
-        meta = document.createElement('meta');
-        if (property.startsWith('og:') || property.startsWith('twitter:')) {
-          meta.setAttribute('property', property);
-        } else {
-          meta.setAttribute('name', property);
-        }
-        document.head.appendChild(meta);
-      }
-      
-      meta.setAttribute('content', content);
     },
 
     async requestAddress(wishID) {
@@ -1190,6 +1163,87 @@ export default {
       }
       this.AddToWishlistModal = false;
       this.$emit('showCategoryModal');
+    },
+
+    updateMetaTags() {
+      if (!this.currentWishlist) return;
+
+      // Get the wishlist image or use a default one
+      let wishlistImage = this.currentWishlist.photo;
+      
+      if (!wishlistImage) {
+        // Use category-specific image if available
+        if (this.currentWishlist.category?.slug) {
+          wishlistImage = this.getCategoryImage(this.currentWishlist.category.slug);
+        } else {
+          // Fallback to default logo
+          wishlistImage = '/assets/Logo-single.svg';
+        }
+      }
+
+      // Create the full URL for the image
+      const baseUrl = window.location.origin;
+      const fullImageUrl = wishlistImage.startsWith('http') ? wishlistImage : `${baseUrl}${wishlistImage}`;
+
+      // Create dynamic title and description
+      const username = this.currentWishlist.user?.username || 'Someone';
+      const wishlistName = this.currentWishlist.name || 'Wishlist';
+      const description = this.currentWishlist.description || 'Discover amazing gifts and make their wishes come true!';
+
+      // Update Open Graph meta tags
+      this.updateMetaTag('og:title', `${wishlistName} - ${username}'s Wishlist`);
+      this.updateMetaTag('og:description', `Check out ${username}'s wishlist on Moment Hub. ${description}`);
+      this.updateMetaTag('og:image', fullImageUrl);
+      this.updateMetaTag('og:url', window.location.href);
+      this.updateMetaTag('og:type', 'website');
+      this.updateMetaTag('og:site_name', 'Moment Hub');
+
+      // Update Twitter Card meta tags
+      this.updateMetaTag('twitter:card', 'summary_large_image');
+      this.updateMetaTag('twitter:title', `${wishlistName} - ${username}'s Wishlist`);
+      this.updateMetaTag('twitter:description', `Check out ${username}'s wishlist on Moment Hub. ${description}`);
+      this.updateMetaTag('twitter:image', fullImageUrl);
+
+      // Update page title
+      document.title = `${wishlistName} - ${username}'s Wishlist | Moment Hub`;
+    },
+
+    getCategoryImage(slug) {
+      const categoryImages = {
+        anniversary: '/assets/others-3.svg',
+        'baby-shower': '/assets/baby.svg',
+        birthday: '/assets/13-1.svg',
+        wedding: '/assets/wedding.svg',
+        book: '/assets/others-5.svg',
+        fashion: '/assets/others.svg',
+        gadgets: '/assets/others-4.svg',
+        graduation: '/assets/graduation.svg',
+        holiday: '/assets/holiday.svg',
+        'house-warming': '/assets/others-2.svg',
+        others: '/assets/others-9.svg',
+        personal: '/assets/personal.svg',
+        'pet-supply': '/assets/others-7.svg',
+        ramadan: '/assets/others-8.svg',
+        travel: '/assets/others-6.svg',
+      };
+      return categoryImages[slug] || '/assets/others-9.svg';
+    },
+
+    updateMetaTag(property, content) {
+      let meta = document.querySelector(`meta[property="${property}"]`) || 
+                 document.querySelector(`meta[name="${property}"]`);
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        if (property.startsWith('og:')) {
+          meta.setAttribute('property', property);
+        } else if (property.startsWith('twitter:')) {
+          meta.setAttribute('name', property);
+        }
+        document.head.appendChild(meta);
+      }
+      
+      meta.setAttribute('content', content);
     }
 
   }
