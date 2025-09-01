@@ -273,22 +273,6 @@
   <Loader :show="loading" />
 </template>
 
-<style scoped>
-.highlight-wish {
-  animation: highlightPulse 3s ease-in-out;
-  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
-}
-
-@keyframes highlightPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(147, 51, 234, 0.8);
-  }
-}
-</style>
-
 <script>
 import axios from 'axios';
 import Loader from '@/components/Loader.vue';
@@ -305,7 +289,6 @@ import EmptyState from '@/components/Dashboard/EmptyState.vue';
 import GiftReservedModal from '@/components/GiftReservedModal.vue';
 import { isTokenExpired } from "@/router/index.js"; // Import the function
 import AddToWishlist from '@/components/AddToWishlist.vue';
-import { socialPreviewManager } from '@/utils/socialPreview.js';
 
 
 export default {
@@ -406,21 +389,11 @@ export default {
       
       this.loadCurrentUser(); // Load user data when component is created
     }
-    
-    // Check if this is an individual wish route
-    if (this.$route.name === 'Wish' && this.$route.params.id) {
-      await this.handleIndividualWishRoute(this.$route.params.id);
-    } else {
-      this.loadData();
-    }
+    this.loadData();
   },
   mounted() {
    console.log();
    
-  },
-  unmounted() {
-    // Reset social preview to default when component is unmounted
-    socialPreviewManager.resetToDefault();
   },
   methods: {
 
@@ -782,11 +755,6 @@ export default {
       console.log('working');
       
       this.isShareMenuOpen = !this.isShareMenuOpen;
-      
-      // Update social preview when share menu is opened
-      if (this.isShareMenuOpen && this.currentWishlist) {
-        socialPreviewManager.updateWishlistPreview(this.currentWishlist);
-      }
     },
 
     copyLink() {
@@ -794,28 +762,10 @@ export default {
         this.redirectToLogin();
         return;
       }
-      
-      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
-      let wishlistImage = this.currentWishlist.photo;
-      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
-        // Use first wish photo if available
-        wishlistImage = this.currentWishlist.wishes[0].photo;
-      }
-      if (!wishlistImage && this.currentWishlist.category?.slug) {
-        // Use category image
-        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
-      }
-      if (!wishlistImage) {
-        // Fallback to logo
-        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
-      }
-      
-      // Create a social preview URL with parameters including image
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
-      
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const message = this.currentUser?.username === this.currentWishlist?.user.username
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
-        : `Check out this wishlist: ${previewUrl}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+        : `Check out this wishlist: ${wishlistUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
@@ -825,25 +775,7 @@ export default {
         this.redirectToLogin();
         return;
       }
-      
-      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
-      let wishlistImage = this.currentWishlist.photo;
-      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
-        // Use first wish photo if available
-        wishlistImage = this.currentWishlist.wishes[0].photo;
-      }
-      if (!wishlistImage && this.currentWishlist.category?.slug) {
-        // Use category image
-        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
-      }
-      if (!wishlistImage) {
-        // Fallback to logo
-        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
-      }
-      
-      // Create a social preview URL with parameters including image
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
-      
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
           ? `Check out my wishlist on Moments Hub`
@@ -851,8 +783,8 @@ export default {
       );
       const body = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
-          : `Check out this wishlist: ${previewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
@@ -861,29 +793,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      
-      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
-      let wishlistImage = this.currentWishlist.photo;
-      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
-        // Use first wish photo if available
-        wishlistImage = this.currentWishlist.wishes[0].photo;
-      }
-      if (!wishlistImage && this.currentWishlist.category?.slug) {
-        // Use category image
-        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
-      }
-      if (!wishlistImage) {
-        // Fallback to logo
-        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
-      }
-      
-      // Create a social preview URL with parameters including image
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
-      
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
-          : `Check out this wishlist: ${previewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
@@ -892,29 +806,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      
-      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
-      let wishlistImage = this.currentWishlist.photo;
-      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
-        // Use first wish photo if available
-        wishlistImage = this.currentWishlist.wishes[0].photo;
-      }
-      if (!wishlistImage && this.currentWishlist.category?.slug) {
-        // Use category image
-        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
-      }
-      if (!wishlistImage) {
-        // Fallback to logo
-        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
-      }
-      
-      // Create a social preview URL with parameters including image
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
-      
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
-          : `Check out this wishlist: ${previewUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
+          : `Check out this wishlist: ${wishlistUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
@@ -923,26 +819,8 @@ export default {
         this.redirectToLogin();
         return;
       }
-      
-      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
-      let wishlistImage = this.currentWishlist.photo;
-      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
-        // Use first wish photo if available
-        wishlistImage = this.currentWishlist.wishes[0].photo;
-      }
-      if (!wishlistImage && this.currentWishlist.category?.slug) {
-        // Use category image
-        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
-      }
-      if (!wishlistImage) {
-        // Fallback to logo
-        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
-      }
-      
-      // Create a social preview URL with parameters including image
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
-      
-      const url = encodeURIComponent(previewUrl);
+      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const url = encodeURIComponent(wishlistUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"
@@ -994,63 +872,10 @@ export default {
           this.fetchWishlistDetails(wishlistId),
           this.fetchWishes(wishlistId),
         ]);
-
-        // Update social preview after loading wishlist data
-        if (this.currentWishlist) {
-          socialPreviewManager.updateWishlistPreview(this.currentWishlist);
-        }
-
-        // Check if we need to highlight a specific wish
-        if (this.$route.query.highlight) {
-          this.highlightWish(this.$route.query.highlight);
-        }
       } catch (error) {
         console.error('Failed to load data:', error);
       } finally {
         this.loading = false;
-      }
-    },
-
-    async handleIndividualWishRoute(wishId) {
-      this.loading = true;
-      try {
-        // Fetch the wish details to get the wishlist ID
-        const response = await this.$axios.get(`${this.$baseURL}/wishes/${wishId}`);
-        const wish = response.data.data;
-        
-        if (wish && wish.wishlist_id) {
-          // Redirect to the wishlist with the wish highlighted
-          this.$router.replace({
-            name: 'Wishlist',
-            params: { 
-              id: wish.wishlist_id, 
-              username: wish.wishlist?.user?.username || 'user'
-            },
-            query: { highlight: wishId }
-          });
-        } else {
-          // If wish not found, redirect to home
-          this.$router.replace({ name: 'Home' });
-        }
-      } catch (error) {
-        console.error('Error fetching wish:', error);
-        // If error, redirect to home
-        this.$router.replace({ name: 'Home' });
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    highlightWish(wishId) {
-      // Find the wish and scroll to it
-      const wishElement = document.querySelector(`[data-wish-id="${wishId}"]`);
-      if (wishElement) {
-        wishElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Add a temporary highlight effect
-        wishElement.classList.add('highlight-wish');
-        setTimeout(() => {
-          wishElement.classList.remove('highlight-wish');
-        }, 3000);
       }
     },
     handleEditWishlist(wishlist) {

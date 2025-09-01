@@ -51,12 +51,6 @@ const routes = [
     props: true,
   },
   {
-    path: "/wish/:id",
-    name: "Wish",
-    component: Wishlist,
-    props: true,
-  },
-  {
     path: "/archived/:id",
     name: "ArchivedWishlist",
     component: ArchivedWishlist,

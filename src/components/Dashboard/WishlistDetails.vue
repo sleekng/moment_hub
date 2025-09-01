@@ -137,8 +137,7 @@
 
 <script>
 import { eventBus } from '@/eventBus.js';
-import { isTokenExpired } from "@/router/index.js";
-import { socialPreviewManager } from '@/utils/socialPreview.js'; // Import the function
+import { isTokenExpired } from "@/router/index.js"; // Import the function
 
 export default {
   name: 'WishlistDetails',
@@ -200,11 +199,6 @@ export default {
         return;
       }
       this.isShareMenuOpen = !this.isShareMenuOpen;
-      
-      // Update social preview when share menu is opened
-      if (this.isShareMenuOpen && this.selectedWishlist) {
-        socialPreviewManager.updateWishlistPreview(this.selectedWishlist);
-      }
     },
     copyLink() {
       if (!this.isLoggedIn) {
