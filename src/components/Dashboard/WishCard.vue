@@ -925,16 +925,20 @@ export default {
       }
     },
     copyLink() {
-      const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      
       const message = this.isWishOwner 
-        ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${wishUrl}`
-        : `Check out this wish: ${wishUrl}`;
+        ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${previewUrl}`
+        : `Check out this wish: ${previewUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wish link copied to clipboard!");
       });
     },
     shareToEmail() {
-      const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      
       const subject = encodeURIComponent(
         this.isWishOwner
           ? `Check out my wish on Moments Hub`
@@ -942,32 +946,38 @@ export default {
       );
       const body = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${wishUrl}`
-          : `Check out this wish: ${wishUrl}`
+          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${previewUrl}`
+          : `Check out this wish: ${previewUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
-      const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      
       const text = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${wishUrl}`
-          : `Check out this wish: ${wishUrl}`
+          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${previewUrl}`
+          : `Check out this wish: ${previewUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
-      const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      
       const text = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${wishUrl}`
-          : `Check out this wish: ${wishUrl}`
+          ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${previewUrl}`
+          : `Check out this wish: ${previewUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
-      const wishUrl = `${window.location.origin}/wish/${this.wish.id}`;
-      const url = encodeURIComponent(wishUrl);
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      
+      const url = encodeURIComponent(previewUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"

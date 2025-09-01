@@ -65,7 +65,7 @@ export class SocialPreviewManager {
     }
 
     // Fallback to logo
-    return `${this.baseURL}/assets/Logo.png`;
+    return `${this.baseURL}/assets/sharable-log.png`;
   }
 
   // Get appropriate image for wish
@@ -81,12 +81,12 @@ export class SocialPreviewManager {
     }
 
     // Fallback to logo
-    return `${this.baseURL}/assets/Logo.png`;
+    return `${this.baseURL}/assets/sharable-log.png`;
   }
 
   // Convert relative image URL to absolute URL
   getFullImageUrl(imageUrl) {
-    if (!imageUrl) return `${this.baseURL}/assets/Logo.png`;
+    if (!imageUrl) return `${this.baseURL}/assets/sharable-log.png`;
     
     // If already absolute URL, return as is
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
@@ -161,7 +161,7 @@ export class SocialPreviewManager {
     const defaultMeta = {
       title: 'Moment Hub - Wishlist Makes Gifting Easy and Meaningful!',
       description: 'Create and share your perfect wishlist with Moment Hub. Make gifting easy and meaningful for birthdays, holidays, or any special occasion!',
-      image: `${this.baseURL}/assets/Logo.png`,
+      image: `${this.baseURL}/assets/sharable-log.png`,
       url: this.baseURL,
       type: 'website'
     };

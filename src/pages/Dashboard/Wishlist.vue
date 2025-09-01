@@ -794,10 +794,13 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      
       const message = this.currentUser?.username === this.currentWishlist?.user.username
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-        : `Check out this wishlist: ${wishlistUrl}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+        : `Check out this wishlist: ${previewUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
@@ -807,7 +810,10 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
           ? `Check out my wishlist on Moments Hub`
@@ -815,8 +821,8 @@ export default {
       );
       const body = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
@@ -825,11 +831,14 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
@@ -838,11 +847,14 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
@@ -851,8 +863,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
-      const url = encodeURIComponent(wishlistUrl);
+      
+      // Create a social preview URL with parameters
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      
+      const url = encodeURIComponent(previewUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"
