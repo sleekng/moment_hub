@@ -795,8 +795,23 @@ export default {
         return;
       }
       
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
+      let wishlistImage = this.currentWishlist.photo;
+      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
+        // Use first wish photo if available
+        wishlistImage = this.currentWishlist.wishes[0].photo;
+      }
+      if (!wishlistImage && this.currentWishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
       
       const message = this.currentUser?.username === this.currentWishlist?.user.username
         ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
@@ -811,8 +826,23 @@ export default {
         return;
       }
       
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
+      let wishlistImage = this.currentWishlist.photo;
+      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
+        // Use first wish photo if available
+        wishlistImage = this.currentWishlist.wishes[0].photo;
+      }
+      if (!wishlistImage && this.currentWishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
       
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -832,8 +862,23 @@ export default {
         return;
       }
       
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
+      let wishlistImage = this.currentWishlist.photo;
+      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
+        // Use first wish photo if available
+        wishlistImage = this.currentWishlist.wishes[0].photo;
+      }
+      if (!wishlistImage && this.currentWishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
       
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -848,8 +893,23 @@ export default {
         return;
       }
       
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
+      let wishlistImage = this.currentWishlist.photo;
+      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
+        // Use first wish photo if available
+        wishlistImage = this.currentWishlist.wishes[0].photo;
+      }
+      if (!wishlistImage && this.currentWishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
       
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
@@ -864,8 +924,23 @@ export default {
         return;
       }
       
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}`;
+      // Get the wishlist image - use wishlist photo, first wish photo, category image, or fallback
+      let wishlistImage = this.currentWishlist.photo;
+      if (!wishlistImage && this.currentWishlist.wishes && this.currentWishlist.wishes.length > 0) {
+        // Use first wish photo if available
+        wishlistImage = this.currentWishlist.wishes[0].photo;
+      }
+      if (!wishlistImage && this.currentWishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.currentWishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.currentWishlist.id}&username=${this.currentWishlist.user.username}&title=${encodeURIComponent(this.currentWishlist.title)}&description=${encodeURIComponent(this.currentWishlist.description || `Check out this amazing wishlist by ${this.currentWishlist.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
       
       const url = encodeURIComponent(previewUrl);
       window.open(

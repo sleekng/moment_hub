@@ -353,16 +353,42 @@ export default {
       this.isShareMenuOpen = !this.isShareMenuOpen;
     },
     copyLink() {
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.wishlist.id}`;
+      // Get the wishlist image - use wishlist photo, category image, or fallback
+      let wishlistImage = this.wishlist.photo;
+      if (!wishlistImage && this.wishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.wishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.wishlist.id}&username=${this.user.username}&title=${encodeURIComponent(this.wishlist.title)}&description=${encodeURIComponent(this.wishlist.description || `Check out this amazing wishlist by ${this.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
+      
       const message = this.isWishOwner 
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}/${this.user.username}`
-        : `Check out this wishlist: ${wishlistUrl}/${this.user.username}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+        : `Check out this wishlist: ${previewUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
     },
     shareToEmail() {
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.wishlist.id}`;
+      // Get the wishlist image - use wishlist photo, category image, or fallback
+      let wishlistImage = this.wishlist.photo;
+      if (!wishlistImage && this.wishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.wishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.wishlist.id}&username=${this.user.username}&title=${encodeURIComponent(this.wishlist.title)}&description=${encodeURIComponent(this.wishlist.description || `Check out this amazing wishlist by ${this.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
+      
       const subject = encodeURIComponent(
         this.isWishOwner
           ? `Check out my wishlist on Moments Hub`
@@ -370,32 +396,71 @@ export default {
       );
       const body = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}/${this.user.username}`
-          : `Check out this wishlist: ${wishlistUrl}/${this.user.username}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.wishlist.id}`;
+      // Get the wishlist image - use wishlist photo, category image, or fallback
+      let wishlistImage = this.wishlist.photo;
+      if (!wishlistImage && this.wishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.wishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.wishlist.id}&username=${this.user.username}&title=${encodeURIComponent(this.wishlist.title)}&description=${encodeURIComponent(this.wishlist.description || `Check out this amazing wishlist by ${this.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
+      
       const text = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}/${this.user.username}`
-          : `Check out this wishlist: ${wishlistUrl}/${this.user.username}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.wishlist.id}`;
+      // Get the wishlist image - use wishlist photo, category image, or fallback
+      let wishlistImage = this.wishlist.photo;
+      if (!wishlistImage && this.wishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.wishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.wishlist.id}&username=${this.user.username}&title=${encodeURIComponent(this.wishlist.title)}&description=${encodeURIComponent(this.wishlist.description || `Check out this amazing wishlist by ${this.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
+      
       const text = encodeURIComponent(
         this.isWishOwner
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}/${this.user.username}`
-          : `Check out this wishlist: ${wishlistUrl}/${this.user.username}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${previewUrl}`
+          : `Check out this wishlist: ${previewUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.wishlist.id}/${this.user.username}`;
-      const url = encodeURIComponent(wishlistUrl);
+      // Get the wishlist image - use wishlist photo, category image, or fallback
+      let wishlistImage = this.wishlist.photo;
+      if (!wishlistImage && this.wishlist.category?.slug) {
+        // Use category image
+        wishlistImage = `${window.location.origin}/assets/${this.wishlist.category.slug}.svg`;
+      }
+      if (!wishlistImage) {
+        // Fallback to logo
+        wishlistImage = `${window.location.origin}/assets/logo-single.png`;
+      }
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wishlist-preview.html?id=${this.wishlist.id}&username=${this.user.username}&title=${encodeURIComponent(this.wishlist.title)}&description=${encodeURIComponent(this.wishlist.description || `Check out this amazing wishlist by ${this.user.username}`)}&image=${encodeURIComponent(wishlistImage)}`;
+      
+      const url = encodeURIComponent(previewUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"

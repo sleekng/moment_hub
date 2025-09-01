@@ -925,8 +925,12 @@ export default {
       }
     },
     copyLink() {
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      // Get the wish image - use wish photo, category image, or fallback
+      const wishImage = this.wish.photo || 
+        (this.wish.wishlist?.category?.slug ? `${window.location.origin}/assets/${this.wish.wishlist.category.slug}.svg` : `${window.location.origin}/assets/logo-single.png`);
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}&image=${encodeURIComponent(wishImage)}`;
       
       const message = this.isWishOwner 
         ? `Hey there! I'd love for you to check out my wish on Moments Hub: ${previewUrl}`
@@ -936,8 +940,12 @@ export default {
       });
     },
     shareToEmail() {
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      // Get the wish image - use wish photo, category image, or fallback
+      const wishImage = this.wish.photo || 
+        (this.wish.wishlist?.category?.slug ? `${window.location.origin}/assets/${this.wish.wishlist.category.slug}.svg` : `${window.location.origin}/assets/logo-single.png`);
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}&image=${encodeURIComponent(wishImage)}`;
       
       const subject = encodeURIComponent(
         this.isWishOwner
@@ -952,8 +960,12 @@ export default {
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
     shareToWhatsApp() {
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      // Get the wish image - use wish photo, category image, or fallback
+      const wishImage = this.wish.photo || 
+        (this.wish.wishlist?.category?.slug ? `${window.location.origin}/assets/${this.wish.wishlist.category.slug}.svg` : `${window.location.origin}/assets/logo-single.png`);
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}&image=${encodeURIComponent(wishImage)}`;
       
       const text = encodeURIComponent(
         this.isWishOwner
@@ -963,8 +975,12 @@ export default {
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
     shareToTwitter() {
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      // Get the wish image - use wish photo, category image, or fallback
+      const wishImage = this.wish.photo || 
+        (this.wish.wishlist?.category?.slug ? `${window.location.origin}/assets/${this.wish.wishlist.category.slug}.svg` : `${window.location.origin}/assets/logo-single.png`);
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}&image=${encodeURIComponent(wishImage)}`;
       
       const text = encodeURIComponent(
         this.isWishOwner
@@ -974,8 +990,12 @@ export default {
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
     shareToFacebook() {
-      // Create a social preview URL with parameters
-      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}`;
+      // Get the wish image - use wish photo, category image, or fallback
+      const wishImage = this.wish.photo || 
+        (this.wish.wishlist?.category?.slug ? `${window.location.origin}/assets/${this.wish.wishlist.category.slug}.svg` : `${window.location.origin}/assets/logo-single.png`);
+      
+      // Create a social preview URL with parameters including image
+      const previewUrl = `${window.location.origin}/wish-preview.html?id=${this.wish.id}&name=${encodeURIComponent(this.wish.name)}&description=${encodeURIComponent(this.wish.description || `Check out this amazing wish: ${this.wish.name}`)}&wishlistId=${this.wish.wishlist_id}&username=${this.wish.wishlist?.user?.username || 'user'}&image=${encodeURIComponent(wishImage)}`;
       
       const url = encodeURIComponent(previewUrl);
       window.open(
