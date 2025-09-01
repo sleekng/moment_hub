@@ -11,6 +11,7 @@ import Account from "@/pages/Dashboard/Account.vue";
 import Archived from "@/pages/Dashboard/Archived.vue";
 import ArchivedWishlist from "@/pages/Dashboard/ArchivedWishlist.vue";
 import Wishlist from "@/pages/Dashboard/Wishlist.vue";
+import SocialPreview from "@/pages/SocialPreview.vue";
 /* import Friends from '@/pages/Friends.vue'; */
 /* import Profile from '@/pages/Profile.vue'; */
 import Login from "@/pages/Auth/Login.vue";
@@ -51,12 +52,17 @@ const routes = [
     props: true,
   },
   {
+    path: "/social-preview/:id/:username",
+    name: "SocialPreview",
+    component: SocialPreview,
+    props: true,
+  },
+  {
     path: "/archived/:id",
     name: "ArchivedWishlist",
     component: ArchivedWishlist,
     props: true,
   },
-
   {
     path: "/:username",
     name: "UsersProfile",
@@ -132,6 +138,7 @@ router.beforeEach((to, from, next) => {
     "TermsandCondition",
     "UsersProfile",
     "Wishlist",
+    "SocialPreview",
     "OAuthCallback",
     "Login",
     "Register",

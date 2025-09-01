@@ -205,10 +205,10 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const message = this.canShow
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-        : `Check out this wishlist: ${wishlistUrl}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+        : `Check out this wishlist: ${socialPreviewUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
@@ -218,16 +218,16 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.canShow
           ? `Check out my wishlist on Moments Hub`
-          : `Check out this wishlist: ${this.selectedWishlist.title}`
+          : `Check out this wishlist: ${this.selectedWishlist.name}`
       );
       const body = encodeURIComponent(
         this.canShow
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
@@ -236,11 +236,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const text = encodeURIComponent(
         this.canShow
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
@@ -249,11 +249,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
       const text = encodeURIComponent(
         this.canShow
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
@@ -262,8 +262,8 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
-      const url = encodeURIComponent(wishlistUrl);
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.selectedWishlist.id}/${this.selectedWishlist.user.username}`;
+      const url = encodeURIComponent(socialPreviewUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"

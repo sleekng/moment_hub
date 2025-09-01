@@ -763,9 +763,10 @@ export default {
         return;
       }
       const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const message = this.currentUser?.username === this.currentWishlist?.user.username
-        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-        : `Check out this wishlist: ${wishlistUrl}`;
+        ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+        : `Check out this wishlist: ${socialPreviewUrl}`;
       navigator.clipboard.writeText(message).then(() => {
         eventBus.onSuccess("Wishlist link copied to clipboard!");
       });
@@ -775,16 +776,16 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const subject = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
           ? `Check out my wishlist on Moments Hub`
-          : `Check out this wishlist: ${this.currentWishlist.title}`
+          : `Check out this wishlist: ${this.currentWishlist.name}`
       );
       const body = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     },
@@ -793,11 +794,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.open(`https://wa.me/?text=${text}`, "_blank");
     },
@@ -806,11 +807,11 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
       const text = encodeURIComponent(
         this.currentUser?.username === this.currentWishlist?.user.username
-          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${wishlistUrl}`
-          : `Check out this wishlist: ${wishlistUrl}`
+          ? `Hey there! I'd love for you to check out my wishlist on Moments Hub: ${socialPreviewUrl}`
+          : `Check out this wishlist: ${socialPreviewUrl}`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     },
@@ -819,8 +820,8 @@ export default {
         this.redirectToLogin();
         return;
       }
-      const wishlistUrl = `${window.location.origin}/wishlist/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
-      const url = encodeURIComponent(wishlistUrl);
+      const socialPreviewUrl = `${window.location.origin}/social-preview/${this.currentWishlist.id}/${this.currentWishlist.user.username}`;
+      const url = encodeURIComponent(socialPreviewUrl);
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${url}`,
         "_blank"
@@ -995,6 +996,9 @@ export default {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
         });
         this.currentWishlist = response.data.data;
+        
+        // Update social media meta tags for this wishlist
+        this.updateSocialMetaTags();
       } catch (error) {
         console.error('Error fetching wishlist details:', error);
       }
@@ -1008,6 +1012,55 @@ export default {
       } catch (error) {
         console.error('Error fetching wishes:', error);
       }
+    },
+
+    updateSocialMetaTags() {
+      if (!this.currentWishlist) return;
+
+      const wishlist = this.currentWishlist;
+      const baseUrl = window.location.origin;
+      const currentUrl = window.location.href;
+
+      // Create dynamic title
+      const title = `${wishlist.name} - ${wishlist.user.username}'s Wishlist | Moment Hub`;
+      
+      // Create dynamic description
+      const description = wishlist.description || 
+        `Check out ${wishlist.user.username}'s amazing wishlist on Moment Hub. Discover perfect gift ideas and make gifting meaningful!`;
+      
+      // Get wishlist image or use default
+      const imageUrl = wishlist.photo ? 
+        `${baseUrl}/storage/${wishlist.photo}` : 
+        `${baseUrl}/assets/Logo.png`;
+
+      // Update meta tags dynamically
+      this.updateMetaTag('title', title);
+      this.updateMetaTag('description', description);
+      this.updateMetaTag('og:title', title);
+      this.updateMetaTag('og:description', description);
+      this.updateMetaTag('og:image', imageUrl);
+      this.updateMetaTag('og:url', currentUrl);
+      this.updateMetaTag('twitter:title', title);
+      this.updateMetaTag('twitter:description', description);
+      this.updateMetaTag('twitter:image', imageUrl);
+      this.updateMetaTag('twitter:card', 'summary_large_image');
+    },
+
+    updateMetaTag(property, content) {
+      let meta = document.querySelector(`meta[property="${property}"]`) || 
+                 document.querySelector(`meta[name="${property}"]`);
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        if (property.startsWith('og:') || property.startsWith('twitter:')) {
+          meta.setAttribute('property', property);
+        } else {
+          meta.setAttribute('name', property);
+        }
+        document.head.appendChild(meta);
+      }
+      
+      meta.setAttribute('content', content);
     },
 
     async requestAddress(wishID) {
