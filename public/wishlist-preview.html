@@ -8,7 +8,7 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" id="og-title" content="Moment Hub - Wishlist Makes Gifting Easy and Meaningful!">
     <meta property="og:description" id="og-description" content="Create and share your perfect wishlist with Moment Hub. Make gifting easy and meaningful for birthdays, holidays, or any special occasion!">
-    <meta property="og:image" id="og-image" content="https://momentshub.org/assets/sharable-log.png">
+    <meta property="og:image" id="og-image" content="https://momentshub.org/assets/logo-single.png">
     <meta property="og:url" id="og-url" content="https://momentshub.org">
     <meta property="og:type" content="website">
     <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" id="twitter-title" content="Moment Hub - Wishlist Makes Gifting Easy and Meaningful!">
     <meta name="twitter:description" id="twitter-description" content="Create and share your perfect wishlist with Moment Hub. Make gifting easy and meaningful for birthdays, holidays, or any special occasion!">
-    <meta name="twitter:image" id="twitter-image" content="https://momentshub.org/assets/sharable-log.png">
+    <meta name="twitter:image" id="twitter-image" content="https://momentshub.org/assets/logo-single.png">
     <meta name="twitter:image:alt" id="twitter-image-alt" content="Moment Hub - Create and share your perfect wishlist">
     <meta name="twitter:site" content="@momenthub">
     
@@ -69,7 +69,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="/assets/sharable-log.png" alt="Moment Hub" class="logo">
+        <img src="/assets/logo-single.png" alt="Moment Hub" class="logo">
         <h1 id="wishlist-title">Moment Hub</h1>
         <p id="wishlist-description">Create and share your perfect wishlist with Moment Hub. Make gifting easy and meaningful for birthdays, holidays, or any special occasion!</p>
         <p class="redirect-text">Redirecting to the full wishlist...</p>
@@ -112,7 +112,7 @@
         const username = getUrlParameter('username');
         const wishlistTitle = getUrlParameter('title') || 'Wishlist';
         const wishlistDescription = getUrlParameter('description') || 'Check out this amazing wishlist!';
-        const wishlistImage = getUrlParameter('image') || 'https://momentshub.org/assets/sharable-log.png';
+        const wishlistImage = getUrlParameter('image') || 'https://momentshub.org/assets/logo-single.png';
 
         if (wishlistId && username) {
             const fullUrl = `https://momentshub.org/wishlist/${wishlistId}/${username}`;
@@ -130,7 +130,7 @@
             updateMetaTags(
                 'Moment Hub - Wishlist Makes Gifting Easy and Meaningful!',
                 'Create and share your perfect wishlist with Moment Hub. Make gifting easy and meaningful for birthdays, holidays, or any special occasion!',
-                'https://momentshub.org/assets/sharable-log.png',
+                'https://momentshub.org/assets/logo-single.png',
                 'https://momentshub.org'
             );
             
